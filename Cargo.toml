@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "src/website_backend",
+    "src/nftwallet"
+]
+resolver = "2"
