@@ -28,7 +28,6 @@ export default HomePage;
 
 // import { useEffect, useState } from 'react';
 // import { website_backend } from '../../../declarations/website_backend';
-// import { nftwallet } from '../../../declarations/nftwallet';
 // import { AuthClient } from '@dfinity/auth-client';
 // import { Actor } from '@dfinity/agent';
 

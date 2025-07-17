@@ -16,15 +16,9 @@
       "package": "website_backend",
       "type": "rust"
     },
-    "nftwallet": {
-      "candid": "src/nftwallet/nftwallet.did",
-      "package": "nftwallet",
-      "type": "rust"
-    },
     "website_frontend": {
       "dependencies": [
-        "website_backend",
-        "nftwallet"
+        "website_backend"
       ],
       "source": [
         "src/website_frontend/dist"
