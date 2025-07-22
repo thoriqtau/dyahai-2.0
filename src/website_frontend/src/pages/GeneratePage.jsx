@@ -14,17 +14,17 @@ import { IoMdDownload } from "react-icons/io";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
 import Navbar from "../components/layout/Navbar";
-import imageAstronout from "../assets/images/art-styles-models/astronout.jpg";
+import imageAstronout from "../assets/images/art-styles-models/kakek.jpg";
 import imageCyberpunk from "../assets/images/art-styles-models/cyberpunk.jpg";
-import imageJoker from "../assets/images/art-styles-models/joker.jpg";
-import imageBaroque from "../assets/images/art-styles-models/baroque.jpg";
-import imageFormal from "../assets/images/art-styles-models/formal.jpg";
-import imagePainting from "../assets/images/art-styles-models/painting.jpg";
-import imageShrek from "../assets/images/art-styles-models/shrek.jpg";
-import imageZombie from "../assets/images/art-styles-models/zombie.jpg";
+// import imageJoker from "../assets/images/art-styles-models/joker.jpg";
+// import imageBaroque from "../assets/images/art-styles-models/baroque.jpg";
+// import imageFormal from "../assets/images/art-styles-models/formal.jpg";
+// import imagePainting from "../assets/images/art-styles-models/painting.jpg";
+// import imageShrek from "../assets/images/art-styles-models/shrek.jpg";
+// import imageZombie from "../assets/images/art-styles-models/zombie.jpg";
 
 const GeneratePage = () => {
-  const { credit, principalId, isLoggedIn, Login, Logout, refreshCredit } = useAuth();
+  const { credit, principalId, isLoggedIn, Login, Logout, refreshCredit, actor } = useAuth();
   const [state, setState] = useState({
     isLoading: false,
     selectedFile: null,
@@ -35,14 +35,24 @@ const GeneratePage = () => {
   });
 
   const itemStyle = [
-    { id: "1", label: "Astronout", image: imageAstronout },
-    { id: "2", label: "Cyberpunk", image: imageCyberpunk },
-    { id: "3", label: "Joker", image: imageJoker },
-    { id: "4", label: "Baroque", image: imageBaroque },
-    { id: "5", label: "Formal", image: imageFormal },
-    { id: "6", label: "Painting", image: imagePainting },
-    { id: "7", label: "Shrek", image: imageShrek },
-    { id: "8", label: "Zombie", image: imageZombie },
+    {
+      id: "1",
+      label: "Astronout",
+      image: imageAstronout, 
+      getFile: async () => {
+        const response = await fetch(imageAstronout);
+        return await response.blob();
+      },
+    },
+    {
+      id: "2",
+      label: "Cyberpunk",
+      image: imageCyberpunk, 
+      getFile: async () => {
+        const response = await fetch(imageCyberpunk);
+        return await response.blob();
+      },
+    },
   ];
 
   const settings = {
@@ -90,6 +100,7 @@ const GeneratePage = () => {
     try {
       const blob = base64ToBlob(selectedFile);
       console.log("Converting base64 to blob:", blob);
+      console.log("Principal", principalId);
       await uploadImageToBackend(blob);
     } catch (error) {
       console.error("Error uploading image:", error);
@@ -116,11 +127,10 @@ const GeneratePage = () => {
     try {
       const { selectedStyle } = state;
       const nat8Array = new Uint8Array(await imageBlob.arrayBuffer());
-      const styleBlob = new Blob([selectedStyle], {
-        type: "application/octet-stream",
-      });
+      const styleBlob = await selectedStyle.getFile();
       const styleNat8Array = new Uint8Array(await styleBlob.arrayBuffer());
-      const response = await website_backend.send_http_post_request(
+
+      const response = await actor.send_http_post_request(
         nat8Array,
         styleNat8Array,
       );
@@ -138,7 +148,7 @@ const GeneratePage = () => {
         setState((prev) => ({ ...prev, imageUrl: base64Image }));
         const responseBlob = new Blob([response], { type: "image/jpeg" });
         const result = await uploadBlobToStoracha(responseBlob);
-        await website_backend.save_image_to_store(result.toString());
+        await actor.save_image_to_store(result.toString());
 
         // Oke, log the result
         console.log("Image uploaded to Storacha:", result.toString());
@@ -159,7 +169,7 @@ const GeneratePage = () => {
 
   const handleDeleteAllImages = async () => {
     try {
-      const success = await website_backend.deleteAllImages();
+      const success = await actor.deleteAllImages();
       console.log(
         success
           ? "All images deleted successfully."
@@ -185,8 +195,8 @@ const GeneratePage = () => {
 
   const addCredit = async () => {
     try {
-      await website_backend.addCredit(principalId, 1);
-      const updatedBalance = await website_backend.get_balance();
+      await actor.addCredit(principalId, 1);
+      const updatedBalance = await actor.get_balance();
       setState((prev) => ({ ...prev, balance: updatedBalance.toString() }));
     } catch (error) {
       console.error("Error adding credit:", error);
@@ -272,7 +282,7 @@ const GeneratePage = () => {
                             onChange={() =>
                               setState((prev) => ({
                                 ...prev,
-                                selectedStyle: style.id,
+                                selectedStyle: style,
                               }))
                             }
                           />

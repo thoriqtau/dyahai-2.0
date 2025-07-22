@@ -25,6 +25,12 @@
       ],
       "type": "assets",
       "workspace": "website_frontend"
+    },
+    "icp_ledger": {
+      "type": "custom",
+      "candid": "ledger.did",
+      "wasm": "ledger.wasm",
+      "init_arg_file": "init-args.did"
     }
   },
   "defaults": {
