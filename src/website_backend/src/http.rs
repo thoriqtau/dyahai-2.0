@@ -63,7 +63,7 @@ pub async fn send_http_post(source_image: Vec<u8>, target_image: Vec<u8>) -> Vec
     ic_cdk::println!("[DEBUG] Source image (base64, truncated): {}", &source_b64[..100.min(source_b64.len())]);
     ic_cdk::println!("[DEBUG] Target image (base64, truncated): {}", &target_b64[..100.min(target_b64.len())]);
 
-    let url = "https://api.runpod.ai/v2/d02co97949255s/runsync";
+    let url = "https://api.runpod.ai/v2/{YOUR_ID_PROJECT}/runsync";
 
     // let source_b64 = general_purpose::STANDARD.encode(source_image);
     // let target_b64 = general_purpose::STANDARD.encode(target_image);
@@ -93,7 +93,7 @@ pub async fn send_http_post(source_image: Vec<u8>, target_image: Vec<u8>) -> Vec
         
         HttpHeader {
             name: "Authorization".to_string(),
-            value: "Bearer rpa_RMCSD2B6VUZU6I4102T3B7YB2V7AUIIWVORZNQ4Tthds79".to_string(), // Ganti YOUR_API_KEY sesuai kebutuhan
+            value: "Bearer {YOUR_API_KEY}".to_string(), // Ganti YOUR_API_KEY sesuai kebutuhan
         },
 
         HttpHeader {
