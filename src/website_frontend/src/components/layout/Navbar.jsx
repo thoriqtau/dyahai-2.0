@@ -201,7 +201,7 @@ const Navbar = ({
                 className="hover:bg-accentColor hover:border-accentColor hover:shadow-[0px_5px_30px_5px_rgba(32,_119,_116,_.75)]"
                 isMotion
               >
-                Login
+                Connect Plug
               </Button>
             )}
           </div>

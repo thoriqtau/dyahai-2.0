@@ -1,0 +1,19 @@
+(
+    variant {
+        Init = record {
+            minting_account = "6091df08d472437084a7e581046b6024baf28014df9d5ac664984e6e197c3e1b";
+            initial_values = vec {
+                record {
+                    "d21ce754f21b54c954b4d9912a73cff94be336c89de2f5342ea2383af622ca25";
+                    record { e8s = 100_000_000_000 }
+                }
+            };
+            archive_options = opt record {
+                num_blocks_to_archive = 1000000;
+                trigger_threshold = 1000000;
+                controller_id = principal "vhzqj-iqzy3-yox3i-xaepy-ks33q-6yljw-jaayn-iqnk5-lyvll-y4pcy-wqe"
+            };
+            send_whitelist = vec {};
+        }
+    }
+)

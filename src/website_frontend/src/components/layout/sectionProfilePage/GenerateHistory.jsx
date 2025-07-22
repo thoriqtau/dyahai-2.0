@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { useAuth } from "../../../Hooks/authHook";
+import { useAuth } from "../../../hooks/authHook";
 import { website_backend } from '../../../../../declarations/website_backend';
 
 import { FaEthereum } from "react-icons/fa";
@@ -8,17 +8,18 @@ import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 
 const GenerateHistory = ({ principalId, isLoggedIn }) => {
+  const { actor } = useAuth();
   const [images, setImages] = useState([]);
 
   async function loadImages() {
     try {
-      const fetchedImages = await website_backend.get_images_by_principal();
+      const fetchedImages = await actor.get_images_by_principal();
       console.log("fetched:", fetchedImages);
-      
+
       const ResultCid = fetchedImages.map((cid) => ({
         url: `https://${cid}.ipfs.w3s.link/`,
       }));
-      
+
       setImages(ResultCid);
       console.log("setImages :>>", ResultCid);
     } catch (error) {
@@ -59,17 +60,17 @@ const GenerateHistory = ({ principalId, isLoggedIn }) => {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!",
       });
-  
+
       if (result.isConfirmed) {
         console.log("Image Index: ", imageIndex);
-        
+
         // Mengirim permintaan ke backend untuk menghapus gambar berdasarkan index
-        await website_backend.delete_image_by_index(imageIndex); // Mengirim index gambar
-        
-  
+        await actor.delete_image_by_index(imageIndex); // Mengirim index gambar
+
+
         // Memperbarui tampilan dengan menghapus gambar dari array berdasarkan index
         setImages(images.filter((_, index) => index !== imageIndex));
-  
+
         // Menampilkan notifikasi sukses
         Swal.fire("Deleted!", "Your image has been deleted.", "success");
       }
@@ -78,7 +79,7 @@ const GenerateHistory = ({ principalId, isLoggedIn }) => {
       Swal.fire("Error!", "There was an error deleting your image.", "error");
     }
   }
-  
+
 
   function handleDownloadImage(image) {
     if (!image) {
@@ -95,10 +96,10 @@ const GenerateHistory = ({ principalId, isLoggedIn }) => {
   }
 
   useEffect(() => {
-    if (isLoggedIn && principalId) {
-      loadImages();
-    }
-  }, [isLoggedIn, principalId]);
+    if (isLoggedIn && principalId && actor) {
+        loadImages();
+      }
+  }, [actor, isLoggedIn, principalId]);
 
   return (
     <div className="{} m-4 min-w-fit rounded-lg bg-slate-100 p-5">

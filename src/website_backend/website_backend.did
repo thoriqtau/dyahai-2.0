@@ -5,4 +5,7 @@ service : {
     "get_images_by_principal": () -> (vec text);
     "delete_image_by_index": (nat) -> ();
     "save_image_to_store": (text) -> ();
+    "get_tier": () -> (text);
+    "get_account_id_for_canister": () -> (text);
+    "get_tx_summary": (nat64,nat64) -> (text);
 }
