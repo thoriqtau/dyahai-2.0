@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../hooks/authHook";
 import { uploadBlobToStoracha } from "../hooks/authStoracha";
-import { website_backend } from "../../../declarations/website_backend";
 
 import Swal from "sweetalert2";
 import Button from "../components/ui/Button";
@@ -14,14 +13,31 @@ import { IoMdDownload } from "react-icons/io";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
 import Navbar from "../components/layout/Navbar";
-import imageAstronout from "../assets/images/art-styles-models/kakek.jpg";
-import imageCyberpunk from "../assets/images/art-styles-models/cyberpunk.jpg";
-// import imageJoker from "../assets/images/art-styles-models/joker.jpg";
-// import imageBaroque from "../assets/images/art-styles-models/baroque.jpg";
-// import imageFormal from "../assets/images/art-styles-models/formal.jpg";
-// import imagePainting from "../assets/images/art-styles-models/painting.jpg";
-// import imageShrek from "../assets/images/art-styles-models/shrek.jpg";
-// import imageZombie from "../assets/images/art-styles-models/zombie.jpg";
+import imageAstronout from "../assets/images/art-styles-models/man/Astronout.jpg";
+import imageBackpacker from "../assets/images/art-styles-models/man/Backpacker.jpg";
+import imageCyberpunk from "../assets/images/art-styles-models/man/Cyberpunk.jpg";
+import imageDetective from "../assets/images/art-styles-models/man/Detective.jpg";
+import imageDreamworks from "../assets/images/art-styles-models/man/Dreamworks.jpg";
+import imageRenaissance from "../assets/images/art-styles-models/man/Renaissance.jpg";
+import imageRetro from "../assets/images/art-styles-models/man/Retro.jpg";
+import imageSteampunk from "../assets/images/art-styles-models/man/Steampunk.jpg";
+import imageStreetwear from "../assets/images/art-styles-models/man/Streetwear.jpg";
+import imageSuperhero from "../assets/images/art-styles-models/man/Superhero.jpg";
+import imageWasteland from "../assets/images/art-styles-models/man/Wasteland.jpg";
+import imageArtisticW from "../assets/images/art-styles-models/women/Artistic.jpg";
+import imageCyberpunkW from "../assets/images/art-styles-models/women/Cyberpunk.jpg";
+import imageDreamy from "../assets/images/art-styles-models/women/Dreamy.jpg";
+import imageFashion from "../assets/images/art-styles-models/women/Fashion.jpg";
+import imageKorean from "../assets/images/art-styles-models/women/Korean.jpg";
+import imageNature from "../assets/images/art-styles-models/women/Nature.jpg";
+import imageRenaissanceW from "../assets/images/art-styles-models/women/Renaissance.jpg";
+import imageRetroW from "../assets/images/art-styles-models/women/Retro.jpg";
+import imageSchool from "../assets/images/art-styles-models/women/School.jpg";
+import imageSoft from "../assets/images/art-styles-models/women/Soft.jpg";
+import imageSunset from "../assets/images/art-styles-models/women/Sunset.jpg";
+
+
+
 
 const GeneratePage = () => {
   const { credit, principalId, isLoggedIn, Login, Logout, refreshCredit, actor } = useAuth();
@@ -37,7 +53,7 @@ const GeneratePage = () => {
   const itemStyle = [
     {
       id: "1",
-      label: "Astronout",
+      label: "Astronout Man",
       image: imageAstronout, 
       getFile: async () => {
         const response = await fetch(imageAstronout);
@@ -46,10 +62,190 @@ const GeneratePage = () => {
     },
     {
       id: "2",
-      label: "Cyberpunk",
+      label: "Cyberpunk Man",
       image: imageCyberpunk, 
       getFile: async () => {
         const response = await fetch(imageCyberpunk);
+        return await response.blob();
+      },
+    },
+    {
+      id: "3",
+      label: "Detective Man",
+      image: imageDetective, 
+      getFile: async () => {
+        const response = await fetch(imageDetective);
+        return await response.blob();
+      },
+    },
+    {
+      id: "4",
+      label: "Dreamworks Man",
+      image: imageDreamworks, 
+      getFile: async () => {
+        const response = await fetch(imageDreamworks);
+        return await response.blob();
+      },
+    },
+    {
+      id: "5",
+      label: "Renaissance Man",
+      image: imageRenaissance, 
+      getFile: async () => {
+        const response = await fetch(imageRenaissance);
+        return await response.blob();
+      },
+    },
+    {
+      id: "6",
+      label: "Retro Man",
+      image: imageRetro, 
+      getFile: async () => {
+        const response = await fetch(imageRetro);
+        return await response.blob();
+      },
+    },
+    {
+      id: "7",
+      label: "Steampunk Man",
+      image: imageSteampunk, 
+      getFile: async () => {
+        const response = await fetch(imageSteampunk);
+        return await response.blob();
+      },
+    },
+    {
+      id: "8",
+      label: "Streetwear Man",
+      image: imageStreetwear, 
+      getFile: async () => {
+        const response = await fetch(imageStreetwear);
+        return await response.blob();
+      },
+    },
+    {
+      id: "9",
+      label: "Superhero Man",
+      image: imageSuperhero, 
+      getFile: async () => {
+        const response = await fetch(imageSuperhero);
+        return await response.blob();
+      },
+    },
+    {
+      id: "10",
+      label: "Wasteland Man",
+      image: imageWasteland, 
+      getFile: async () => {
+        const response = await fetch(imageWasteland);
+        return await response.blob();
+      },
+    },
+    {
+      id: "11",
+      label: "Artistic Women",
+      image: imageArtisticW, 
+      getFile: async () => {
+        const response = await fetch(imageArtisticW);
+        return await response.blob();
+      },
+    },
+    {
+      id: "12",
+      label: "Cyberpunk Women",
+      image: imageCyberpunkW, 
+      getFile: async () => {
+        const response = await fetch(imageCyberpunkW);
+        return await response.blob();
+      },
+    },
+    {
+      id: "13",
+      label: "Dreamy Women",
+      image: imageDreamy, 
+      getFile: async () => {
+        const response = await fetch(imageDreamy);
+        return await response.blob();
+      },
+    },
+    {
+      id: "14",
+      label: "Fashion Women",
+      image: imageFashion, 
+      getFile: async () => {
+        const response = await fetch(imageFashion);
+        return await response.blob();
+      },
+    },
+    {
+      id: "15",
+      label: "Korean Women",
+      image: imageKorean, 
+      getFile: async () => {
+        const response = await fetch(imageKorean);
+        return await response.blob();
+      },
+    },
+    {
+      id: "16",
+      label: "Nature Women",
+      image: imageNature, 
+      getFile: async () => {
+        const response = await fetch(imageNature);
+        return await response.blob();
+      },
+    },
+    {
+      id: "17",
+      label: "Renaissance Women",
+      image: imageRenaissanceW, 
+      getFile: async () => {
+        const response = await fetch(imageRenaissanceW);
+        return await response.blob();
+      },
+    },
+    {
+      id: "18",
+      label: "Retro Women",
+      image: imageRetroW, 
+      getFile: async () => {
+        const response = await fetch(imageRetroW);
+        return await response.blob();
+      },
+    },
+    {
+      id: "19",
+      label: "School Women",
+      image: imageSchool, 
+      getFile: async () => {
+        const response = await fetch(imageSchool);
+        return await response.blob();
+      },
+    },
+    {
+      id: "20",
+      label: "Soft Women",
+      image: imageSoft, 
+      getFile: async () => {
+        const response = await fetch(imageSoft);
+        return await response.blob();
+      },
+    },
+    {
+      id: "21",
+      label: "Sunset Women",
+      image: imageSunset, 
+      getFile: async () => {
+        const response = await fetch(imageSunset);
+        return await response.blob();
+      },
+    },
+    {
+      id: "22",
+      label: "Backpacker Man",
+      image: imageBackpacker, 
+      getFile: async () => {
+        const response = await fetch(imageBackpacker);
         return await response.blob();
       },
     },
@@ -134,38 +330,71 @@ const GeneratePage = () => {
         nat8Array,
         styleNat8Array,
       );
-      console.log("Response dari backend Jalan mas:>>", response);
+      console.log("Job ID:", response);
       console.log("Response dari backend Jalan mas:>>", response.type);
-      if (response.length === 0) {
-        showAlert(
-          "warning",
-          "WARNING!!!",
-          "You have reached the maximum image limit.",
-        );
-      } else {
-        console.log("Proses Gambar mulai :>>");
-        const base64Image = `data:image/png;base64,${await blobToBase64(response)}`;
-        setState((prev) => ({ ...prev, imageUrl: base64Image }));
-        const responseBlob = new Blob([response], { type: "image/jpeg" });
-        const result = await uploadBlobToStoracha(responseBlob);
-        await actor.save_image_to_store(result.toString());
-
-        // Oke, log the result
-        console.log("Image uploaded to Storacha:", result.toString());
-      }
+      const jobIdText = new TextDecoder().decode(response);
+      console.log("Job ID baru:", jobIdText);
+      await pollUntilReady(jobIdText);
     } catch (error) {
       console.error("Error uploading image:", error);
     }
   };
 
-  const blobToBase64 = (blob) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result.split(",")[1]);
-      reader.onerror = reject;
-      reader.readAsDataURL(new Blob([new Uint8Array(blob)]));
-    });
-  };
+  const pollUntilReady = async (jobId) => {
+    const maxRetries = 30;
+    const delay = 4000;
+    let attempt = 0;
+
+    while (attempt < maxRetries) {
+
+    console.log('attempt : ', attempt)
+      try {
+        console.log('status belum terpanggil')
+        const result = await actor.check_style_status(jobId);
+        console.log('status sudah terpanggil : ', result.status)
+        if (result.status === "COMPLETED" && result.image) {
+          console.log('status sudah completed')
+
+          const byteArray = result.image[0]; 
+          console.log('result.image:', result.image[0]);
+          console.log('Length of result.image:', byteArray.length);
+          const blob = new Blob([byteArray], { type: "image/png" });
+          console.log("data gambar ", blob)
+          const dataUrl = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          });
+          setState((prev) => ({ ...prev, imageUrl: dataUrl }));
+          const storachaResult = await uploadBlobToStoracha(blob);
+          console.log("storachaResult:", storachaResult);
+
+          await actor.save_image_to_store(storachaResult.toString());
+          return;
+
+        } else if (result.status === "FAILED") {
+          showAlert("error", "Error", "Image generation failed.");
+          return;
+        }
+      } catch (error) {
+        console.error("Polling error:", error);
+      }
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      attempt++;
+    }
+    showAlert("error", "Timeout", "Image generation took too long.");
+};
+
+
+  // const blobToBase64 = (blob) => {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => resolve(reader.result.split(",")[1]);
+  //     reader.onerror = reject;
+  //     reader.readAsDataURL(new Blob([new Uint8Array(blob)]));
+  //   });
+  // };
 
   const handleDeleteAllImages = async () => {
     try {

@@ -1,4 +1,4 @@
-mod http;
+pub mod http;
 mod storages;
 mod users_store;
 
@@ -12,6 +12,8 @@ use candid::{CandidType, Deserialize, Principal, Nat};
 use serde_json::to_string;
 use num_bigint::BigUint;
 use std::any::Any;
+use crate::http::StyleStatusResult;
+
 
 #[derive(CandidType, Deserialize, Serialize, Debug)]
 pub struct ParsedTransaction {
@@ -159,7 +161,7 @@ pub async fn send_http_post_request(image: Vec<u8>, style: Vec<u8>) -> Vec<u8> {
         users_store::reduction_credit(principal.clone());
     }
 
-    response
+    response.into()
 }
 
 
