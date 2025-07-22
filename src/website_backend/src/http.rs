@@ -93,7 +93,7 @@ pub async fn send_http_post(source_image: Vec<u8>, target_image: Vec<u8>) -> Vec
         
         HttpHeader {
             name: "Authorization".to_string(),
-            value: "{YOUR_API_KEY}".to_string(), // Ganti YOUR_API_KEY sesuai kebutuhan
+            value: "{YOUR_API_KEY}".to_string(),
         },
 
         HttpHeader {
