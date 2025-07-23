@@ -5,15 +5,15 @@ import Advantages from "../components/layout/sectionHomePage/Advantages";
 import Gallery from "../components/layout/sectionHomePage/Gallery";
 import About from "../components/layout/sectionHomePage/About";
 import Footer from "../components/layout/sectionHomePage/Footer";
-import { useAuth } from "../hooks/authHook";
+import { useAuth } from "../provider/authProvider";
 const HomePage = () => {
-  const { credit, principalId, isLoggedIn, Login, Logout } = useAuth();
+  const { loading, credit, principalId, isLoggedIn, Login, Logout } = useAuth();
   
   return (
     <>
       <div className="font-Poppins flex h-full w-full flex-col justify-center gap-y-40">
-        <Navbar navbarStyle="primary" principalId={principalId} isLoggedIn={isLoggedIn} credit={credit} Login={Login} Logout={Logout} />
-        <Hero Login={Login} isLoggedIn={isLoggedIn}/>
+        <Navbar navbarStyle="primary" principalId={principalId} isLoggedIn={isLoggedIn} credit={credit} Login={Login} Logout={Logout} loading={loading} />
+        <Hero />
         <Feature Login={Login} isLoggedIn={isLoggedIn}/>
         <Advantages />
         <Gallery />

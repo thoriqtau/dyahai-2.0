@@ -1,5 +1,5 @@
 import React from "react";
-// import { useAuth } from "../../../Hooks/authHook";
+import { useAuth } from "../../../provider/authProvider";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../../../variants";
 
@@ -7,8 +7,8 @@ import Swal from "sweetalert2";
 import Button from "../../ui/Button";
 import HeroImage from "../../../assets/images/hero/hero-image.png";
 
-const Hero = ({ Login, isLoggedIn}) => {
-  // const { isLoggedIn } = useAuth();
+const Hero = () => {
+  const { Login, isLoggedIn } = useAuth();
 
   const handleNavigationGenerate = () => {
     if (isLoggedIn) {
@@ -94,7 +94,7 @@ const Hero = ({ Login, isLoggedIn}) => {
               {/* <Button onClick={handleGenerateNavigation} variant="primary">
                 Try Now
               </Button> */}
-              <Button variant="primary" size="md" onClick={handleNavigationGenerate}  isMotion>
+              <Button variant="primary" size="md" onClick={handleNavigationGenerate} isMotion>
                 Try Now
               </Button>
             </div>
