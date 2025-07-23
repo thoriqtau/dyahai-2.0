@@ -12,7 +12,9 @@ import "slick-carousel/slick/slick-theme.css";
 import { IoMdDownload } from "react-icons/io";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
+// Man
 import Navbar from "../components/layout/Navbar";
+
 import imageAstronout from "../assets/images/art-styles-models/man/Astronout.jpg";
 import imageBackpacker from "../assets/images/art-styles-models/man/Backpacker.jpg";
 import imageCyberpunk from "../assets/images/art-styles-models/man/Cyberpunk.jpg";
@@ -24,6 +26,8 @@ import imageSteampunk from "../assets/images/art-styles-models/man/Steampunk.jpg
 import imageStreetwear from "../assets/images/art-styles-models/man/Streetwear.jpg";
 import imageSuperhero from "../assets/images/art-styles-models/man/Superhero.jpg";
 import imageWasteland from "../assets/images/art-styles-models/man/Wasteland.jpg";
+
+// Woman
 import imageArtisticW from "../assets/images/art-styles-models/women/Artistic.jpg";
 import imageCyberpunkW from "../assets/images/art-styles-models/women/Cyberpunk.jpg";
 import imageDreamy from "../assets/images/art-styles-models/women/Dreamy.jpg";
@@ -36,17 +40,24 @@ import imageSchool from "../assets/images/art-styles-models/women/School.jpg";
 import imageSoft from "../assets/images/art-styles-models/women/Soft.jpg";
 import imageSunset from "../assets/images/art-styles-models/women/Sunset.jpg";
 
-
-
-
 const GeneratePage = () => {
-  const { credit, principalId, isLoggedIn, Login, Logout, refreshCredit, actor } = useAuth();
+  const {
+    credit,
+    principalId,
+    isLoggedIn,
+    Login,
+    Logout,
+    refreshCredit,
+    actor,
+  } = useAuth();
+  const [isDragging, setIsDragging] = useState(false);
   const [state, setState] = useState({
     isLoading: false,
     selectedFile: null,
     output: "",
     imageUrl: "",
     selectedStyle: "",
+    selectedGenderCategory: "man",
     balance: 0,
   });
 
@@ -54,7 +65,8 @@ const GeneratePage = () => {
     {
       id: "1",
       label: "Astronout Man",
-      image: imageAstronout, 
+      image: imageAstronout,
+      genderCategory: "man", // add new
       getFile: async () => {
         const response = await fetch(imageAstronout);
         return await response.blob();
@@ -62,179 +74,209 @@ const GeneratePage = () => {
     },
     {
       id: "2",
+      label: "Backpacker Man",
+      image: imageBackpacker,
+      genderCategory: "man",
+      getFile: async () => {
+        const response = await fetch(imageBackpacker);
+        return await response.blob();
+      },
+    },
+    {
+      id: "3",
       label: "Cyberpunk Man",
-      image: imageCyberpunk, 
+      image: imageCyberpunk,
+      genderCategory: "man",
       getFile: async () => {
         const response = await fetch(imageCyberpunk);
         return await response.blob();
       },
     },
     {
-      id: "3",
+      id: "4",
       label: "Detective Man",
-      image: imageDetective, 
+      image: imageDetective,
+      genderCategory: "man",
       getFile: async () => {
         const response = await fetch(imageDetective);
         return await response.blob();
       },
     },
     {
-      id: "4",
+      id: "5",
       label: "Dreamworks Man",
-      image: imageDreamworks, 
+      image: imageDreamworks,
+      genderCategory: "man",
       getFile: async () => {
         const response = await fetch(imageDreamworks);
         return await response.blob();
       },
     },
     {
-      id: "5",
+      id: "6",
       label: "Renaissance Man",
-      image: imageRenaissance, 
+      image: imageRenaissance,
+      genderCategory: "man",
       getFile: async () => {
         const response = await fetch(imageRenaissance);
         return await response.blob();
       },
     },
     {
-      id: "6",
+      id: "7",
       label: "Retro Man",
-      image: imageRetro, 
+      image: imageRetro,
+      genderCategory: "man",
       getFile: async () => {
         const response = await fetch(imageRetro);
         return await response.blob();
       },
     },
     {
-      id: "7",
+      id: "8",
       label: "Steampunk Man",
-      image: imageSteampunk, 
+      image: imageSteampunk,
+      genderCategory: "man",
       getFile: async () => {
         const response = await fetch(imageSteampunk);
         return await response.blob();
       },
     },
     {
-      id: "8",
+      id: "9",
       label: "Streetwear Man",
-      image: imageStreetwear, 
+      image: imageStreetwear,
+      genderCategory: "man",
       getFile: async () => {
         const response = await fetch(imageStreetwear);
         return await response.blob();
       },
     },
     {
-      id: "9",
+      id: "10",
       label: "Superhero Man",
-      image: imageSuperhero, 
+      image: imageSuperhero,
+      genderCategory: "man",
       getFile: async () => {
         const response = await fetch(imageSuperhero);
         return await response.blob();
       },
     },
     {
-      id: "10",
+      id: "11",
       label: "Wasteland Man",
-      image: imageWasteland, 
+      image: imageWasteland,
+      genderCategory: "man",
       getFile: async () => {
         const response = await fetch(imageWasteland);
         return await response.blob();
       },
     },
     {
-      id: "11",
+      id: "12",
       label: "Artistic Women",
-      image: imageArtisticW, 
+      image: imageArtisticW,
+      genderCategory: "woman",
       getFile: async () => {
         const response = await fetch(imageArtisticW);
         return await response.blob();
       },
     },
     {
-      id: "12",
+      id: "13",
       label: "Cyberpunk Women",
-      image: imageCyberpunkW, 
+      image: imageCyberpunkW,
+      genderCategory: "woman",
       getFile: async () => {
         const response = await fetch(imageCyberpunkW);
         return await response.blob();
       },
     },
     {
-      id: "13",
+      id: "14",
       label: "Dreamy Women",
-      image: imageDreamy, 
+      image: imageDreamy,
+      genderCategory: "woman",
       getFile: async () => {
         const response = await fetch(imageDreamy);
         return await response.blob();
       },
     },
     {
-      id: "14",
+      id: "15",
       label: "Fashion Women",
-      image: imageFashion, 
+      image: imageFashion,
+      genderCategory: "woman",
       getFile: async () => {
         const response = await fetch(imageFashion);
         return await response.blob();
       },
     },
     {
-      id: "15",
+      id: "16",
       label: "Korean Women",
-      image: imageKorean, 
+      image: imageKorean,
+      genderCategory: "woman",
       getFile: async () => {
         const response = await fetch(imageKorean);
         return await response.blob();
       },
     },
     {
-      id: "16",
+      id: "17",
       label: "Nature Women",
-      image: imageNature, 
+      image: imageNature,
+      genderCategory: "woman",
       getFile: async () => {
         const response = await fetch(imageNature);
         return await response.blob();
       },
     },
     {
-      id: "17",
+      id: "18",
       label: "Renaissance Women",
-      image: imageRenaissanceW, 
+      image: imageRenaissanceW,
+      genderCategory: "woman",
       getFile: async () => {
         const response = await fetch(imageRenaissanceW);
         return await response.blob();
       },
     },
     {
-      id: "18",
+      id: "19",
       label: "Retro Women",
-      image: imageRetroW, 
+      image: imageRetroW,
+      genderCategory: "woman",
       getFile: async () => {
         const response = await fetch(imageRetroW);
         return await response.blob();
       },
     },
     {
-      id: "19",
+      id: "20",
       label: "School Women",
-      image: imageSchool, 
+      image: imageSchool,
+      genderCategory: "woman",
       getFile: async () => {
         const response = await fetch(imageSchool);
         return await response.blob();
       },
     },
     {
-      id: "20",
+      id: "21",
       label: "Soft Women",
-      image: imageSoft, 
+      image: imageSoft,
+      genderCategory: "woman",
       getFile: async () => {
         const response = await fetch(imageSoft);
         return await response.blob();
       },
     },
     {
-      id: "21",
+      id: "22",
       label: "Sunset Women",
-      image: imageSunset, 
+      image: imageSunset,
+      genderCategory: "woman",
       getFile: async () => {
         const response = await fetch(imageSunset);
         return await response.blob();
@@ -243,7 +285,8 @@ const GeneratePage = () => {
     {
       id: "22",
       label: "Backpacker Man",
-      image: imageBackpacker, 
+      image: imageBackpacker,
+      genderCategory: "woman",
       getFile: async () => {
         const response = await fetch(imageBackpacker);
         return await response.blob();
@@ -275,9 +318,35 @@ const GeneratePage = () => {
     }
   };
 
+  const handleDragOver = (e, setIsDragging) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e, setIsDragging) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e, setState, setIsDragging) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () =>
+        setState((prev) => ({ ...prev, selectedFile: reader.result }));
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleGenerate = async () => {
     if (credit <= 0) {
-      showAlert("warning", "WARNING!!!", "Insufficient credit. Please add credit to generate images.");
+      showAlert(
+        "warning",
+        "WARNING!!!",
+        "Insufficient credit. Please add credit to generate images."
+      );
       return;
     }
     const { selectedFile, selectedStyle } = state;
@@ -287,7 +356,7 @@ const GeneratePage = () => {
         "WARNING!!!",
         !selectedFile
           ? "Please upload an image first."
-          : "Please select a style first.",
+          : "Please select a style first."
       );
       return;
     }
@@ -328,7 +397,7 @@ const GeneratePage = () => {
 
       const response = await actor.send_http_post_request(
         nat8Array,
-        styleNat8Array,
+        styleNat8Array
       );
       console.log("Job ID:", response);
       console.log("Response dari backend Jalan mas:>>", response.type);
@@ -346,20 +415,19 @@ const GeneratePage = () => {
     let attempt = 0;
 
     while (attempt < maxRetries) {
-
-    console.log('attempt : ', attempt)
+      console.log("attempt : ", attempt);
       try {
-        console.log('status belum terpanggil')
+        console.log("status belum terpanggil");
         const result = await actor.check_style_status(jobId);
-        console.log('status sudah terpanggil : ', result.status)
+        console.log("status sudah terpanggil : ", result.status);
         if (result.status === "COMPLETED" && result.image) {
-          console.log('status sudah completed')
+          console.log("status sudah completed");
 
-          const byteArray = result.image[0]; 
-          console.log('result.image:', result.image[0]);
-          console.log('Length of result.image:', byteArray.length);
+          const byteArray = result.image[0];
+          console.log("result.image:", result.image[0]);
+          console.log("Length of result.image:", byteArray.length);
           const blob = new Blob([byteArray], { type: "image/png" });
-          console.log("data gambar ", blob)
+          console.log("data gambar ", blob);
           const dataUrl = await new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onloadend = () => resolve(reader.result);
@@ -372,7 +440,6 @@ const GeneratePage = () => {
 
           await actor.save_image_to_store(storachaResult.toString());
           return;
-
         } else if (result.status === "FAILED") {
           showAlert("error", "Error", "Image generation failed.");
           return;
@@ -384,8 +451,7 @@ const GeneratePage = () => {
       attempt++;
     }
     showAlert("error", "Timeout", "Image generation took too long.");
-};
-
+  };
 
   // const blobToBase64 = (blob) => {
   //   return new Promise((resolve, reject) => {
@@ -402,7 +468,7 @@ const GeneratePage = () => {
       console.log(
         success
           ? "All images deleted successfully."
-          : "Failed to delete all images.",
+          : "Failed to delete all images."
       );
     } catch (error) {
       console.error("Error deleting all images:", error);
@@ -435,72 +501,207 @@ const GeneratePage = () => {
   return (
     <>
       {state.isLoading && <Loader />}
-      <div className="bg-primaryColor flex h-screen w-full flex-col justify-center md:flex-row">
-        <Navbar navbarStyle={"secondary"} principalId={principalId} isLoggedIn={isLoggedIn} credit={credit} Login={Login} Logout={Logout}/>
-        <div className="bg-primaryColor relative mt-24 flex h-full w-full flex-col items-center justify-start md:fixed md:mt-14 md:flex-row">
-          <div className="border-borderShade h-full w-full border-r-2 border-opacity-40 md:w-1/3">
-            <div className="flex flex-col items-center gap-y-6 py-8 text-center">
-              <div className="text-white">
-                <p>Image</p>
-              </div>
-              <div className="flex w-full flex-col items-center justify-center">
-                <label
-                  htmlFor="dropzone-file"
-                  className="bg-secondaryColor hover:bg-borderShade flex h-[16rem] w-[16rem] cursor-pointer flex-col items-center justify-center rounded-lg p-1"
-                >
-                  <div className="border-borderShade flex h-full w-full flex-col items-center justify-center rounded-lg border border-opacity-40">
-                    {state.selectedFile ? (
-                      <img
-                        src={state.selectedFile}
-                        alt="Selected File"
-                        className="rounded-lg object-fill"
-                        style={{ maxHeight: "100%", maxWidth: "100%" }}
-                      />
-                    ) : (
-                      <>
-                        <svg
-                          className="mb-4 h-8 w-8 text-gray-500 dark:text-gray-400"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
+      <main className="bg-primaryColor h-full md:h-dvh w-full flex flex-col justify-between md:flex-row md:overflow-hidden">
+        <Navbar
+          navbarStyle="secondary"
+          principalId={principalId}
+          isLoggedIn={isLoggedIn}
+          credit={credit}
+          Login={Login}
+          Logout={Logout}
+        />
+
+        <section className="pt-[8dvh] relative w-full h-full flex flex-col items-center md:flex-row">
+          {/* mt-[16dvh] md:mt-[8dvh] */}
+          {/* Left Side */}
+          <div className="border-borderShade flex h-full w-full flex-col border-r-2 border-opacity-40 md:w-1/3 bg-secondaryColor">
+            {/* Menu Atas */}
+            <div className="w-full h-full md:overflow-y-auto px-4 pt-10 py-6">
+              <div className="flex flex-col items-center gap-y-6 text-center">
+                <div className="text-white">
+                  <p>Upload Your Image</p>
+                </div>
+
+                <div className="flex w-full flex-col items-center justify-center">
+                  <label
+                    htmlFor="dropzone-file"
+                    onDragOver={(e) => handleDragOver(e, setIsDragging)}
+                    onDragLeave={(e) => handleDragLeave(e, setIsDragging)}
+                    onDrop={(e) => handleDrop(e, setState, setIsDragging)}
+                    className={`border border-borderShade border-opacity-70 bg-secondaryColor flex w-full max-w-[300px] aspect-square cursor-pointer flex-col items-center justify-center rounded-lg p-1 group ${isDragging ? "ring-2 ring-accentColor2 bg-borderShade/10 scale-105" : ""}`}
+                  >
+                    <div className="flex h-full w-full flex-col items-center justify-center rounded-lg overflow-hidden group-hover:bg-borderShade/15 ">
+                      {state.selectedFile ? (
+                        <img
+                          src={state.selectedFile}
+                          alt="Selected File"
+                          className="h-full w-full object-cover rounded-lg"
+                        />
+                      ) : (
+                        <>
+                          <svg
+                            className="mb-4 h-8 w-8 text-gray-500 dark:text-gray-400"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 20 16"
+                          >
+                            <path
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                            />
+                          </svg>
+                          <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                            <span className="font-semibold">
+                              Click to upload
+                            </span>{" "}
+                            or drag and drop
+                          </p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">
+                            JPEG / JPG (Max. 1024 x 1024 px)
+                          </p>
+                        </>
+                      )}
+                    </div>
+                    <input
+                      id="dropzone-file"
+                      onChange={handleFileChange}
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+
+                {/* Choose Style Start*/}
+
+                <div className="flex w-full max-w-max flex-col gap-4 text-white">
+                  <p>Choose Style:</p>
+
+                  {/* Toggle Button */}
+                  <div className="relative flex w-fit mx-auto rounded-full bg-gray-800 p-1">
+                    {/* Tombol Man */}
+                    <button
+                      onClick={() =>
+                        setState((prev) => ({
+                          ...prev,
+                          selectedGenderCategory: "man",
+                        }))
+                      }
+                      className={`relative z-10 flex items-center gap-1 px-5 py-2 text-sm font-bold rounded-full transition-colors ${
+                        state.selectedGenderCategory === "man"
+                          ? "text-fontPrimaryColor"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
                           fill="none"
-                          viewBox="0 0 20 16"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                          />
-                        </svg>
-                        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                          <span className="font-semibold">Click to upload</span>{" "}
-                          or drag and drop
-                        </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                          JPEG / JPG (Max. 1024 x 1024 px)
-                        </p>
-                      </>
-                    )}
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M12 15a6 6 0 1 0 0-12a6 6 0 0 0 0 12m0 0v6m-2-2h4"
+                        />
+                      </svg>
+                      <span>Man</span>
+                    </button>
+
+                    {/* Tombol Woman */}
+                    <button
+                      onClick={() =>
+                        setState((prev) => ({
+                          ...prev,
+                          selectedGenderCategory: "woman",
+                        }))
+                      }
+                      className={`relative z-10 flex items-center gap-1 px-5 py-2 text-sm font-bold rounded-full transition-colors ${
+                        state.selectedGenderCategory === "woman"
+                          ? "text-fontPrimaryColor"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M14.232 9.747a6 6 0 1 0-8.465 8.506a6 6 0 0 0 8.465-8.506m0 0L20 4m0 0h-4m4 0v4"
+                        />
+                      </svg>
+                      <span>Woman</span>
+                    </button>
+
+                    {/* Indikator Geser */}
+                    <div
+                      className="absolute top-0 left-0 h-full w-1/2 rounded-full bg-accentColor transition-all duration-300"
+                      style={{
+                        transform:
+                          state.selectedGenderCategory === "woman"
+                            ? "translateX(100%)"
+                            : "translateX(0%)",
+                      }}
+                    />
                   </div>
-                  <input
-                    id="dropzone-file"
-                    onChange={handleFileChange}
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                  />
-                </label>
-              </div>
-              <div className="flex w-full flex-col gap-4 px-4 text-white">
-                <p>Choose Style:</p>
-                <div className="h-auto w-full items-start px-6">
-                  <div className="grid grid-cols-1 gap-4">
-                    <Slider {...settings}>
-                      {itemStyle.map((style) => (
+
+                  <div className="h-auto w-full items-start">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-x-4 xl:gap-x-6 md:gap-y-3 xl:gap-y-4">
+                      {itemStyle
+                        .filter(
+                          (style) =>
+                            style.genderCategory ===
+                            state.selectedGenderCategory
+                        )
+                        .map((style) => (
+                          <label
+                            key={style.id}
+                            className="flex flex-col items-center justify-center hover:scale-105 hover:transform duration-200 ease-in-out"
+                          >
+                            <input
+                              type="radio"
+                              name="style"
+                              className="peer hidden"
+                              value={style.id}
+                              checked={state.selectedStyle?.id === style.id}
+                              onChange={() =>
+                                setState((prev) => ({
+                                  ...prev,
+                                  selectedStyle: style, // Menyimpan seluruh objek style
+                                }))
+                              }
+                            />
+                            <div className="max-w-36 aspect-square cursor-pointer rounded-lg border-transparent border-4 peer-checked:border-accentColor2 peer-checked:shadow-xl overflow-hidden">
+                              <img
+                                src={style.image}
+                                alt={style.label}
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                            <p className="mt-1 text-sm text-center">
+                              {style.label}
+                            </p>
+                          </label>
+                        ))}
+
+                      {/* {itemStyle.map((style) => (
                         <label
                           key={style.id}
-                          className="flex flex-col items-center justify-center py-2 hover:scale-105 hover:transform"
+                          className="flex flex-col items-center justify-center hover:scale-105 hover:transform duration-200 ease-in-out"
                         >
                           <input
                             type="radio"
@@ -511,79 +712,79 @@ const GeneratePage = () => {
                             onChange={() =>
                               setState((prev) => ({
                                 ...prev,
-                                selectedStyle: style,
+                                selectedStyle: style.id,
                               }))
                             }
                           />
-                          <div className="h-24 w-24 cursor-pointer rounded-lg border-[3px] bg-cover bg-center peer-checked:border-blue-500">
+                          <div className="max-w-36 aspect-square cursor-pointer rounded-lg border-transparent border-4 peer-checked:border-accentColor2 peer-checked:shadow-xl overflow-hidden">
                             <img
                               src={style.image}
                               alt={style.label}
-                              className="h-full w-full rounded-lg object-cover"
+                              className="h-full w-full object-cover"
                             />
                           </div>
-                          <p className="mt-2">{style.label}</p>
+                          <p className="mt-1 text-sm text-center">
+                            {style.label}
+                          </p>
                         </label>
-                      ))}
-                    </Slider>
+                      ))} */}
+                    </div>
                   </div>
                 </div>
+
+                {/* Choose Style End*/}
               </div>
-              {/* <Button
+            </div>
+
+            {/* Sticky button */}
+            <div className="w-full h-fit flex border-t-2 border-borderShade border-opacity-20 py-4 justify-center items-center md:mb-0">
+              <Button
+                variant="primary"
+                size="md"
                 onClick={handleGenerate}
-                iconButton={<IoArrowForwardCircleOutline size={25} />}
-                variant="primaryFull"
+                isMotion
               >
-                Generate
-              </Button> */}
-              <Button variant="primary" size="md" onClick={handleGenerate} isMotion>
                 <span>Generate</span>
                 <IoArrowForwardCircleOutline size={25} />
               </Button>
             </div>
           </div>
-          <div className="bg-primaryColor h-full w-full md:w-2/3">
-            <div className="flex flex-col items-center gap-4 p-8">
-              <div className="text-white">
-                <p>Image</p>
-              </div>
-              <div className="bg-fontPrimaryColor flex h-[20rem] w-[20rem] flex-col items-center justify-center rounded-lg p-2 md:h-[30rem] md:w-[50rem]">
-                <div className="text-primaryColor relative flex h-full w-full items-center justify-center rounded-lg border p-1">
+
+          {/* Right side */}
+          {/* Right side */}
+          <div className="h-full w-full md:w-2/3 block">
+            <div className="flex flex-col h-full items-center mt-10 m-4 md:mx-0">
+              <p className="text-white font-semibold mb-10">Image</p>
+
+              <div className="w-full md:max-w-[30rem] aspect-square flex flex-col items-center justify-center rounded-lg transition duration-100 border border-neutral-500/30 hover:border-neutral-500/25 bg-gradient-to-b from-neutral-800/40 via-neutral-800/20 shadow-xl shadow-accentColor2/5 p-2 group">
+                {/* w-[80%] md:w-full max-w-[95vw] sm:max-w-[80vw] md:max-w-[70vw] lg:max-w-[60vw] md:aspect-[6/3] aspect-square */}
+                <div className="text-primaryColor flex h-full w-full items-center justify-center rounded-lg relative">
                   {state.imageUrl ? (
                     <img
                       src={state.imageUrl}
                       alt="Generated Result"
-                      className="max-h-full object-cover"
+                      className="h-full w-full object-contain rounded-lg"
                     />
                   ) : (
-                    state.output || "Results will appear here..."
+                    <span className="text-white">{state.output || ""}</span>
                   )}
-                  <button
-                    onClick={handleDownloadImage}
-                    className="hover:bg-accentColor3 hover:text-fontPrimaryColor absolute right-0 top-0 max-w-2xl rounded-full border-2 border-transparent p-2"
-                  >
-                    <IoMdDownload size={30} />
-                  </button>
                 </div>
               </div>
-              <div className="flex flex-row gap-4">
-                <button
-                  onClick={handleDeleteAllImages}
-                  className="text-fontPrimaryColor hover:border-accentColor2 hover:bg-accentColor2 hover:text-primaryColor max-w-2xl rounded-full border-2 bg-transparent px-4 py-2"
+              <div className="w-fit h-fit flex my-10">
+                <Button
+                  variant="primary"
+                  size="md"
+                  onClick={handleDownloadImage}
+                  className="text-fontPrimaryColor hover:bg-accentColor hover:text-primaryColor flex rounded-full"
                 >
-                  Delete
-                </button>
-                <button
-                  onClick={addCredit}
-                  className="text-fontPrimaryColor hover:border-accentColor2 hover:bg-accentColor2 hover:text-primaryColor max-w-2xl rounded-full border-2 bg-transparent px-4 py-2"
-                >
-                  Add Token
-                </button>
+                  <span>Download</span>
+                  <IoMdDownload size={30} />
+                </Button>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </>
   );
 };
