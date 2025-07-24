@@ -2,10 +2,12 @@ import React from "react";
 import { useState } from 'react';
 import Button from "../../ui/Button";
 import { FaPlus } from "react-icons/fa";
-import { useAuth } from "../../../hooks/authHook"; // Assuming you have this hook
+// import { useAuth } from "../../../hooks/authHook"; // Assuming you have this hook
+import { useAuth } from "../../../provider/authProvider";
+import { Principal } from "@dfinity/candid/lib/cjs/idl";
 
 const PaymentGateway = () => {
-  const { TopupCredit } = useAuth();
+  const { TopupCredit, principalId, accountId } = useAuth();
   const [credit, setCredit] = useState(0);
   const [icpAmount, setIcpAmount] = useState(0);
   const [icpInE8s, setIcpInE8s] = useState(0);
@@ -40,6 +42,8 @@ const PaymentGateway = () => {
         <p>Harga ICP saat ini: <strong>${ICP_PRICE_USD}</strong></p>
         <p>Perlu bayar: <strong>{icpAmount.toFixed(6)} ICP</strong></p>
         <p>Dalam e8s: <code>{icpInE8s}</code></p>
+        <p>{principalId}</p>
+        <p>{accountId}</p>
       </div>
       <Button
         variant="outline"

@@ -1,18 +1,32 @@
-import { createContext, useContext, useEffect, useState, useCallback } from 'react';
-import { idlFactory as website_backend_idl, canisterId as website_backend_id } from '../../../declarations/website_backend';
-import { idlFactory as website_icp_ledger_idl, canisterId as website_icp_ledger_id } from '../../../declarations/icp_ledger';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
+import {
+  idlFactory as website_backend_idl,
+  canisterId as website_backend_id,
+} from "../../../declarations/website_backend";
+import {
+  idlFactory as website_icp_ledger_idl,
+  canisterId as website_icp_ledger_id,
+} from "../../../declarations/icp_ledger";
 import { AccountIdentifier } from "@dfinity/ledger-icp";
-import { Principal } from '@dfinity/principal';
+import { Principal } from "@dfinity/principal";
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [loading, setLoading] = useState(true)
-  const [principalId, setPrincipalId] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [principalId, setPrincipalId] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [credit, setCredit] = useState(0);
   const [actor, setActor] = useState(null);
   const [actoricp, setActoricp] = useState(null);
+  const [accountId, setAccountId] = useState(null);
+  const [clientId, setClientId] = useState(null);
 
   const whitelist = [website_backend_id];
 
@@ -73,8 +87,8 @@ export const AuthProvider = ({ children }) => {
   const initPlug = async () => {
     console.log("🔌 initPlug jalan bang");
     if (!window.ic?.plug) {
-    console.warn("🔌 Plug wallet extension not detected.");
-    return;
+      console.warn("🔌 Plug wallet extension not detected.");
+      return;
     }
     const connected = await window.ic.plug.isConnected();
     console.log("🔌 Plug isConnected:", connected);
@@ -85,25 +99,57 @@ export const AuthProvider = ({ children }) => {
         whitelist,
         onConnectionUpdate: async () => {
           console.log("🔄 Account switched, rebuilding actor...");
-        }
+        },
       });
     }
 
     const principal = await window.ic.plug.agent.getPrincipal();
     setPrincipalId(principal.toText());
     console.log("✅ Connected as:", principal.toText());
-    
-    
+
     window.ic.plug.onExternalDisconnect(() => {
       console.warn("🔌 Disconnected externally");
-      setPrincipalId('');
+      setPrincipalId("");
+      setAccountId("");
       setIsLoggedIn(false);
       setCredit(0);
       setActor(null);
-      window.location.href = '/';
+      window.location.href = "/";
     });
     await buildActor();
     setIsLoggedIn(true);
+  };
+
+  // const getAccountId = async () => {
+  //   const principal = await window.ic.plug.agent.getPrincipal();
+  //   const canisterPrincipal = Principal.fromText(principal.toText());
+  //   const accountId = AccountIdentifier.fromPrincipal({
+  //     principal: canisterPrincipal,
+  //   });
+
+  //   const hexAccountId = accountId.toHex();
+  //   setAccountId(hexAccountId);
+
+  //   console.log("🎭 AccountId:", hexAccountId);
+  // };
+
+  const getAccountId = async (customActor = actor) => {
+    if (!customActor) return;
+    const principal = await window.ic.plug.agent.getPrincipal();
+    const clientPrincipal = Principal.fromText(principal.toText());
+    const clientAccountId = AccountIdentifier.fromPrincipal({
+      principal: clientPrincipal,
+    });
+    const canisterPrincipalStr =
+      await customActor.get_account_id_for_canister();
+    const canisterPrincipal = Principal.fromText(canisterPrincipalStr);
+    const canisterAccountId = AccountIdentifier.fromPrincipal({
+      principal: canisterPrincipal,
+    });
+    setClientId(clientAccountId.toHex());
+    setAccountId(canisterAccountId.toHex());
+    console.log("Client Account Id mas :", clientAccountId.toHex());
+    console.log("Client Canister Id mas :", canisterAccountId.toHex());
   };
 
   const buildActor = async () => {
@@ -115,8 +161,10 @@ export const AuthProvider = ({ children }) => {
       canisterId: website_icp_ledger_id,
       interfaceFactory: website_icp_ledger_idl,
     });
+
     setActor(newActor);
     setActoricp(newActoricp);
+    await getAccountId(newActor);
     console.log("🎭 Actor built:", newActor);
     console.log("🎭 Actor built:", newActoricp);
     await refreshCredit(newActor);
@@ -129,11 +177,11 @@ export const AuthProvider = ({ children }) => {
   const Logout = useCallback(async () => {
     if (window.ic?.plug) {
       await window.ic.plug.disconnect();
-      setPrincipalId('');
+      setPrincipalId("");
       setIsLoggedIn(false);
       setCredit(0);
       setActor(null);
-      window.location.href = '/';
+      window.location.href = "/";
     }
   }, []);
 
@@ -145,34 +193,77 @@ export const AuthProvider = ({ children }) => {
       setCredit(Number(balance));
       console.log("💰 Credit:", balance.toString());
     } catch (error) {
-      console.error('⚠ Error refreshing credit:', error);
+      console.error("⚠ Error refreshing credit:", error);
     }
   };
 
+  // const TopupCredit = async (amount, type = "credit") => {
+  //   if (!actor) return;
+  //   try {
+  //     const memo = 1311;
+  //     console.log('💳 Topping up credit...');
+
+  //     // 1. Ambil principal string dari canister
+  //     const canisterPrincipalStr = await actor.get_account_id_for_canister();
+  //     console.log('Canister Principal String:', canisterPrincipalStr);
+
+  //     // 2. Konversi ke Principal
+  //     const canisterPrincipal = Principal.fromText(canisterPrincipalStr);
+
+  //     // 3. Buat AccountIdentifier dari Principal
+  //     const accountIdentifier = AccountIdentifier.fromPrincipal({
+  //       principal: canisterPrincipal
+  //     });
+
+  //     const toAccount = Array.from(accountIdentifier.toUint8Array());
+
+  //     // 4. Timestamp nanos
+  //     const now = BigInt(Date.now()) * 1_000_000n;
+
+  //     // 5. Kirim ICP
+  //     const result = await actoricp.transfer({
+  //       to: toAccount,
+  //       fee: { e8s: 10_000n },
+  //       memo: BigInt(memo),
+  //       from_subaccount: [],
+  //       created_at_time: [{ timestamp_nanos: now }],
+  //       amount: { e8s: BigInt(amount) },
+  //     });
+
+  //     // const data = await actoricp.query_blocks({
+  //     //   start : result.Ok,
+  //     //   length: 1,
+  //     // })
+
+  //     // console.log("📦 Transaction data:", data);
+
+  //     console.log("✅ Transfer result:", result.Ok);
+
+  //     //Validasi transaksi
+  //     const validate_transaction = await actor.get_tx_summary(result.Ok , memo);
+  //     console.log('Transaction Summary:', JSON.parse(validate_transaction));
+
+  //     await refreshCredit();
+  //     console.log('✅ Credit topped up successfully!');
+  //   } catch (error) {
+  //     console.error('⚠ Error topping up credit:', error);
+  //   }
+  // };
+
   const TopupCredit = async (amount, type = "credit") => {
-    if (!actor) return;
+    if (!actor) return { success: false, error: "No actor available" };
     try {
       const memo = 1311;
-      console.log('💳 Topping up credit...');
+      console.log("💳 Topping up credit...");
 
-      // 1. Ambil principal string dari canister
       const canisterPrincipalStr = await actor.get_account_id_for_canister();
-      console.log('Canister Principal String:', canisterPrincipalStr);
-
-      // 2. Konversi ke Principal
       const canisterPrincipal = Principal.fromText(canisterPrincipalStr);
-
-      // 3. Buat AccountIdentifier dari Principal
       const accountIdentifier = AccountIdentifier.fromPrincipal({
-        principal: canisterPrincipal
+        principal: canisterPrincipal,
       });
-
       const toAccount = Array.from(accountIdentifier.toUint8Array());
-
-      // 4. Timestamp nanos
       const now = BigInt(Date.now()) * 1_000_000n;
 
-      // 5. Kirim ICP
       const result = await actoricp.transfer({
         to: toAccount,
         fee: { e8s: 10_000n },
@@ -182,46 +273,52 @@ export const AuthProvider = ({ children }) => {
         amount: { e8s: BigInt(amount) },
       });
 
-      // const data = await actoricp.query_blocks({
-      //   start : result.Ok,
-      //   length: 1,
-      // })
-
-      // console.log("📦 Transaction data:", data);
-
       console.log("✅ Transfer result:", result.Ok);
 
-      //Validasi transaksi
-      const validate_transaction = await actor.get_tx_summary(result.Ok , memo);
-      console.log('Transaction Summary:', JSON.parse(validate_transaction));
+      const validate_transaction = await actor.get_tx_summary(result.Ok, memo);
+      console.log("Transaction Summary:", JSON.parse(validate_transaction));
 
       await refreshCredit();
-      console.log('✅ Credit topped up successfully!');
+      console.log("✅ Credit topped up successfully!");
+
+      return {
+        success: true,
+        data: {
+          blockHeight: result.Ok,
+          summary: JSON.parse(validate_transaction),
+        },
+      };
     } catch (error) {
-      console.error('⚠ Error topping up credit:', error);
+      console.error("⚠ Error topping up credit:", error);
+      return {
+        success: false,
+        error,
+      };
     }
   };
 
-    useEffect(() => {
-    const checkConnection = async () => {
-      const isConnected = await window.ic?.plug?.isConnected();
-      const hasAgent = window.ic?.plug?.agent;
-      if (isConnected && hasAgent) {
-        const principal = await window.ic.plug.agent.getPrincipal();
-        setPrincipalId(principal.toText());
-        setIsLoggedIn(true);
-        await buildActor();
-      }
-      setLoading(false);
-    };
-    checkConnection();
-  }, []);
+  // useEffect(() => {
+  //   const checkConnection = async () => {
+  //     const isConnected = await window.ic?.plug?.isConnected();
+  //     const hasAgent = window.ic?.plug?.agent;
+  //     if (isConnected && hasAgent) {
+  //       const principal = await window.ic.plug.agent.getPrincipal();
+  //       setPrincipalId(principal.toText());
+  //       setIsLoggedIn(true);
+  //       await buildActor();
+  //     }
+  //     setLoading(false);
+  //   };
+  //   checkConnection();
+  // }, []);
 
-return (
+  return (
     <AuthContext.Provider
       value={{
         actor,
         principalId,
+        accountId,
+        clientId,
         isLoggedIn,
         Login,
         Logout,
@@ -245,20 +342,6 @@ export const useAuth = () => {
   return context;
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import { useEffect, useState } from 'react';
 // import { website_backend } from '../../../declarations/website_backend';
 // import { AuthClient } from '@dfinity/auth-client';
@@ -269,7 +352,7 @@ export const useAuth = () => {
 //   const [principalId, setPrincipalId] = useState('');
 //   const [isLoggedIn, setIsLoggedIn] = useState(false);
 //   const [credit, setCredit] = useState(0);
-  
+
 //   useEffect(() => {
 //     createAuthClient();
 //   }, []);
@@ -308,7 +391,7 @@ export const useAuth = () => {
 
 //   const Login = async () => {
 //     if (!authClient) return;
-//     await new Promise((resolve, reject) => 
+//     await new Promise((resolve, reject) =>
 //       authClient.login({
 //         identityProvider: identityProvider(),
 //         onSuccess: resolve,
@@ -339,9 +422,6 @@ export const useAuth = () => {
 //   return { authClient, principalId, credit, isLoggedIn, Login, Logout, refreshCredit: getData };
 // };
 
-
-
-
 // // import { useEffect, useState } from 'react';
 // // import { website_backend } from '../../../declarations/website_backend';
 // // import { AuthClient } from '@dfinity/auth-client';
@@ -352,12 +432,11 @@ export const useAuth = () => {
 // //   const [principalId, setPrincipalId] = useState('');
 // //   const [isLoggedIn, setIsLoggedIn] = useState(false);
 // //   const [credit, setCredit] = useState(0);
-  
+
 // //   useEffect(() => {
 // //     createAuthClient();
 // //   }, []);
 
-  
 // //   const createAuthClient = async () => {
 // //     const client = await AuthClient.create();
 // //     setAuthClient(client);
@@ -393,7 +472,7 @@ export const useAuth = () => {
 
 // //   const Login = async () => {
 // //     if (!authClient) return;
-// //     await new Promise((resolve, reject) => 
+// //     await new Promise((resolve, reject) =>
 // //       authClient.login({
 // //         identityProvider: identityProvider(),
 // //         onSuccess: resolve,
