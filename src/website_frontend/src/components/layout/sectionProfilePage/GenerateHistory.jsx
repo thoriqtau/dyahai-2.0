@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../hooks/authHook";
-import { website_backend } from '../../../../../declarations/website_backend';
+import { removeContentFromStoracha } from "../../../hooks/authStoracha";
+// import { website_backend } from '../../../../../declarations/website_backend';
 
 import { FaEthereum } from "react-icons/fa";
 import { IoMdDownload } from "react-icons/io";
@@ -17,6 +18,7 @@ const GenerateHistory = ({ principalId, isLoggedIn }) => {
       console.log("fetched:", fetchedImages);
 
       const ResultCid = fetchedImages.map((cid) => ({
+        id : cid,
         url: `https://${cid}.ipfs.w3s.link/`,
       }));
 
@@ -49,7 +51,7 @@ const GenerateHistory = ({ principalId, isLoggedIn }) => {
   //   }
   // }
 
-  async function handleDeleteImage(imageIndex) {
+  async function handleDeleteImage(id,imageIndex) {
     try {
       const result = await Swal.fire({
         title: "Are you sure?",
@@ -65,7 +67,8 @@ const GenerateHistory = ({ principalId, isLoggedIn }) => {
         console.log("Image Index: ", imageIndex);
 
         // Mengirim permintaan ke backend untuk menghapus gambar berdasarkan index
-        await actor.delete_image_by_index(imageIndex); // Mengirim index gambar
+        await actor.delete_image_by_index(imageIndex);
+        await removeContentFromStoracha(id);
 
 
         // Memperbarui tampilan dengan menghapus gambar dari array berdasarkan index
@@ -139,7 +142,7 @@ const GenerateHistory = ({ principalId, isLoggedIn }) => {
               </div>
               <div className="flex w-full flex-row justify-end gap-2">
                 <button
-                  onClick={() => handleDeleteImage(index)}
+                  onClick={() => handleDeleteImage(image.id, index)}
                   className="hover:bg-accentColor3 hover:text-fontPrimaryColor rounded-full p-1"
                 >
                   <MdDeleteForever size={20} />

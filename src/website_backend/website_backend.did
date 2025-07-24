@@ -10,7 +10,7 @@ service : {
     "initialize_credit": () -> (text);
     "get_balance": () -> (blob);
     "get_images_by_principal": () -> (vec text);
-    "delete_image_by_index": (nat) -> ();
+    "delete_image_by_index": (nat64) -> ();
     "save_image_to_store": (text) -> ();
     "get_tier": () -> (text);
     "get_account_id_for_canister": () -> (text);

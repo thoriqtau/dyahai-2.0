@@ -102,7 +102,7 @@ pub fn reduction_credit(principal: Principal) {
     USERS_STORE.with(|user| {
         if let Some(user_data) = user.borrow_mut().get_mut(&principal) {
             if !user_data.credits.is_empty() && user_data.credits[0] >= 1 {
-                user_data.credits[0] += 1;
+                user_data.credits[0] -= 1;
                 ic_cdk::println!("Reduced credit by 1 for principal: {}", principal);
             } else {
                 ic_cdk::trap(&format!("Insufficient credit for principal: {}", principal));
