@@ -7,6 +7,7 @@ import ProfilePage from "./pages/ProfilePage";
 import NotFoundPage from "./pages/404Page";
 import { AuthProvider } from "./provider/authProvider";
 import RequireAuth from "./provider/requireAuth";
+import TermsSerivePage from "./pages/TermsServicePage";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             </RequireAuth>
           } />
           <Route path="/*" element={<NotFoundPage />} />
+          <Route path="/terms" element={<TermsSerivePage />} />
         </Routes>
       </Router>
     </AuthProvider>

@@ -26,7 +26,7 @@ const Footer = () => {
             transition={{ duration: 2 }}
           />
         </div>
-        <div className="pb-5 pt-12 text-center md:px-20">
+        <div className="pb-8 pt-12 text-center md:px-20 border-t border-borderShade border-opacity-40">
           <div className="flex flex-wrap justify-center gap-6 py-4 text-white md:grid-cols-3">
             <div className="flex items-center md:hidden">
               <ul className="flex divide-x-2 divide-slate-300 divide-opacity-20">
@@ -43,7 +43,7 @@ const Footer = () => {
                   <li key={index}>
                     <a
                       href={item.href}
-                      className="hover:text-fontPrimaryColor hover:border-fontPrimaryColor border-b-2 border-transparent text-gray-600 focus:border-transparent"
+                      className="select-none transition transform ease-in-out duration-150 text-gray-600 hover:text-fontPrimaryColor"
                     >
                       {item.name}
                     </a>
@@ -59,10 +59,10 @@ const Footer = () => {
             <div className="hidden w-auto items-center justify-center md:flex">
               <ul className="flex gap-10">
                 {menuItems.slice(2, 4).map((item, index) => (
-                  <li key={index}>
+                  <li key={index} className="">
                     <a
                       href={item.href}
-                      className="hover:text-fontPrimaryColor hover:border-fontPrimaryColor border-b-2 border-transparent text-gray-600 focus:border-transparent"
+                      className="select-none transition transform ease-in-out duration-150 text-gray-600 hover:text-fontPrimaryColor"
                     >
                       {item.name}
                     </a>
@@ -71,7 +71,7 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className="pb-2 pt-5 text-xs font-light text-white">
+          <div className="pb-2 pt-5 text-xs font-light text-white/30">
             <p>Copyright © 2024 DyahAI. All rights reserved.</p>
           </div>
         </div>

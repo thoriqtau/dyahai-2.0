@@ -217,7 +217,7 @@ const Navbar = ({
                               <Button
                                 variant="outline"
                                 size="icon"
-                                onClick={Logout}
+                                onClick={() => { navigate("/terms") }}
                                 className="px-2 py-[6px] text-sm hover:bg-accentColor/[0.125]"
                               >
                                 <p className="text-sm">

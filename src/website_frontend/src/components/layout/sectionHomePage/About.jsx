@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence, useAnimation, useMotionValue, useTransform, animate } from "framer-motion";
 // import { useAuth } from "../../../Hooks/authHook";
 
 import Button from "../../ui/Button";
@@ -10,6 +11,7 @@ import avatar3 from "../../../assets/images/about/image-gallery-3.jpeg";
 
 const About = ({ Login, isLoggedIn }) => {
   // const { Login, isLoggedIn } = useAuth();
+  const containerRef = useRef(null);
 
   const itemTestimony = [
     {
@@ -31,6 +33,60 @@ const About = ({ Login, isLoggedIn }) => {
       avatar: avatar3,
     },
   ];
+
+  // Ambil ukuran container untuk menentukan lebar tiap item
+  useEffect(() => {
+    if (containerRef.current) {
+      const width = containerRef.current.offsetWidth / 3;
+      setItemWidth(width);
+      console.log('width :>> ', width);
+    }
+
+    const handleResize = () => {
+      if (containerRef.current) {
+        const width = containerRef.current.offsetWidth / 3;
+        setItemWidth(width);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // const controls = useAnimation();
+  const x = useMotionValue(0);
+  const [itemWidth, setItemWidth] = useState(0); // w-[24rem]
+  const [position, setPosition] = useState(1);
+  const totalItems = itemTestimony.length;
+  const duplicatedItems = [...itemTestimony, ...itemTestimony];
+  const halfLength = duplicatedItems.length / 2;
+
+
+  const updatePosition = async (nextPos) => {
+    await animate(x, -nextPos * itemWidth, {
+      duration: 0.6,
+      ease: "easeInOut",
+    });
+
+    if (nextPos >= halfLength) {
+      await x.set(0);
+      setPosition(0);
+    } else {
+      setPosition(nextPos);
+    }
+  };
+
+  useEffect(() => {
+    if (itemWidth === 0) return;
+
+    const interval = setInterval(() => {
+
+      updatePosition(position + 1);
+    }, 3000); // Setiap 3 detik
+
+    return () => clearInterval(interval);
+  }, [position, itemWidth]);
+
   const handleNavigationGenerate = () => {
     if (isLoggedIn) {
       window.location.href = "/generate";
@@ -66,20 +122,59 @@ const About = ({ Login, isLoggedIn }) => {
               comes to life with just a few clicks.
             </p>
           </div>
-          <div className="divide-borderShade flex h-full w-full flex-row items-center justify-center gap-y-10 divide-x px-4 py-12 text-center md:px-20">
-            {itemTestimony.map((item, index) => (
-              <div key={index} className="space-y-5 md:px-5">
-                <p className="text-sm font-extralight italic">{item.message}</p>
-                <div className="flex items-center justify-center gap-x-4">
-                  <img
-                    src={item.avatar}
-                    alt={`user-review-${index}`}
-                    className="h-8 w-8 rounded-full"
-                  ></img>
-                  <span className="text-sm font-medium">{item.name}</span>
-                </div>
-              </div>
-            ))}
+
+          {/* carousel */}
+          <div className="container relative p-0 overflow-hidden w-full h-fit py-10 items-center" ref={containerRef}>
+            {/* LEFT GRADIENT */}
+            <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-primaryColor to-transparent z-10" />
+
+            {/* RIGHT GRADIENT */}
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-primaryColor to-transparent z-10" />
+
+            <motion.div
+              style={{ x }}
+              className="flex"
+            >
+              {duplicatedItems.map((item, idx) => {
+                const offset = idx * itemWidth;
+
+                // Gunakan transformasi berbasis jarak dari titik x
+                const distance = useTransform(x, (val) => {
+                  const center = -val + itemWidth; // posisi tengah di layar (item ke-2)
+                  return Math.abs(center - offset);
+                });
+
+                const scale = useTransform(distance, [0, itemWidth], [1, 0.85]);
+                const opacity = useTransform(distance, [0, itemWidth], [1, 0.65]);
+
+                return (
+                  <motion.div
+                    key={item.name + idx}
+                    className="max-h-max flex-shrink-0 px-4"
+                    style={{
+                      width: `${itemWidth}px`,
+                      scale,
+                      opacity,
+                    }}
+                  >
+                    <div className=" bg-white/10 rounded-xl text-white flex flex-col justify-center h-full p-4">
+                      <div className="w-full h-full flex flex-col justify-between space-y-8">
+                        <p className="text-base/5 mt-2 text-fontPrimaryColor italic">"{item.message}"</p>
+                        <div className="flex items-center justify-center gap-x-2">
+                          <img
+                            src={item.avatar}
+                            alt={`user-${item.name}`}
+                            className="h-8 w-8 rounded-full"
+                          />
+                          <span className="text-sm font-semibold text-fontPrimaryColor/70">{item.name}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+
+            </motion.div>
           </div>
           <p className="z-10 text-lg font-bold italic">
             Bring Your Imagination to Life with DyahAI Realistic Image
