@@ -1,91 +1,128 @@
-# Generative Image by DyahAI
+<h1 align="center"">
+  🤖DyahAI: Decentralized Platform for Generative Images
+</h1>
 
 <p align="center">
-  <img src="https://tabella.my.id/static/assets/name.webp" width="50%">
+  <img src="https://pbs.twimg.com/media/GwjBQ-lb0AAbVkL?format=jpg&name=medium" width="50%">
 </p>
 
+# WCHL 2025 Hackathon Project
+
+## 🌟 Introduction
 <p align="justify">
 DyahAI is an AI platform that lets users transform ordinary images into unique works of art with customizable styles. Powered by Web3 technology and smart contracts. DyahAI offers a secure, decentralized, and high-quality experience, producing high-resolution images suitable for various needs.
 </p>
 
-<img src="https://tabella.my.id/static/assets/grid.webp" />
+## 📋 Problem Summary
+- **High Cost of Digital Art Creation**: Creating digital art usually requires expensive software, which many users cannot afford.
+- **Time-Consuming Process**: Manual illustration takes a significant amount of time, which is not practical for users who want quick results.
+- **Lack of Customization**: Offering basic text-to-image generation without the ability to guide pose or style.
+- **High Hardware Requirements**: Running the model locally requires a high-VRAM GPU.
 
-# Frontend DyahAI
-<img src="https://tabella.my.id/static/assets/home.webp" />
-<img src="https://tabella.my.id/static/assets/gif.gif" width="100%" />
+## ✨ Our Solution
+- **Free Credits for New Users**: Provide free usage quotas for users, with the option to top up without obligation.
+- **AI-Powered Art Generation**: Allows users to generate digital art from photos in just a few seconds using advanced AI models.
+- **Various Artistic Styles**: Can choose from a variety of pre-defined visual styles, without needing prompts.
+- **Serverless GPU**: Providing backend inference through cloud-based GPUs so that users do not need to own dedicated hardware.
 
-## 📝 Table of Contents
+## 🏆 Pre-existing Project
+DyahAI is the winning project of Hackathon 7.0 organized by ICP Hub Indonesia. At WCHL 2025, DyahAI continued its innovation journey by expanding its capabilities and introducing a range of new features aimed at enhancing user experience, and technological integration.
 
-- [Get Started](#get-started)
-  - [Installation](#installation)
-  - [Usage](#usage)
-- [Contributors](#contribution)
-- [License](#license)
+## ⚡What’s New During the WCHL 2025
+<table>
+  <tr>
+    <th colspan="4" align="center">🕰️ Old Features</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <h3>🧮 Motoko Language</h3>
+      <p>Native language of ICP, used for rapid prototyping of canisters.</p>
+    </td>
+    <td align="center">
+      <h3>🔐 Internet Identity</h3>
+      <p>Default identity system on ICP, easy to implement but limited wallet compatibility.</p>
+    </td>
+    <td align="center">
+      <h3>🚫 No Top-up</h3>
+      <p>Users couldn't add tokens or credits directly into the app.</p>
+    </td>
+    <td align="center">
+      <h3>💾 Stable Memory</h3>
+      <p>Used ICP's stable memory for internal data storage.</p>
+    </td>
+  </tr>
 
-<h2 id="get-started"> 🔗 Get Started</h2>
+  <tr>
+    <th colspan="4" align="center">🚀 New Features</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <h3>🦀 Rust Language</h3>
+      <p>Faster, safer, and more powerful for advanced system and AI integration.</p>
+    </td>
+    <td align="center">
+      <h3>👛 Plug Wallet</h3>
+      <p>More flexible user authentication with wallet support for transactions and identity.</p>
+    </td>
+    <td align="center">
+      <h3>💳 Token Top-up</h3>
+      <p>Users can top-up credits using ICP tokens to unlock features.</p>
+    </td>
+    <td align="center">
+      <h3>📦 IPFS Storage</h3>
+      <p>More scalable and decentralized file storage using IPFS integration.</p>
+    </td>
+  </tr>
+</table>
 
-<h3 id="installation">:hammer: Installation </h3>
+<img src="https://pbs.twimg.com/media/GwjBQ-5bwAALWI7?format=jpg&name=4096x4096" />
 
-Open PowerShell or Windows Command Prompt in administrator mode by right-clicking and selecting "Run as administrator",</br>
-enter the wsl --install command, then restart your machine. </br>
-[WSL windows installation step](https://learn.microsoft.com/en-us/windows/wsl/install)
+## 📊 Architecture Workflow
+<img src="https://pbs.twimg.com/media/GwmcmufbAAAG997?format=jpg&name=large" />
 
-```sh
+## 🔗 Get Started
+### 📋 Prerequisites
+```bash
+# Open PowerShell on "Run as administrator" mode
+# Enter the wsl --install command, then restart your machine.
 wsl --install
-```
 
-Open your WSL, and install dfx.
-
-```sh
+# Open WSL, and install dfx.
 sh -ci "$(curl -fsSL https://internetcomputer.org/install.sh)"
 ```
 
-Next step you can git clone this repository.
+### ⚡ Installation
+```bash
+# Clone the repository on Powershell
+git clone https://github.com/WAW1311/dyahai-2.0.git
+cd dyahai-2.0
 
-```sh
-git clone https://github.com/WAW1311/DyahAI
-```
+# Edit with your YOUR_ID_PROJECT and YOUR_API_KEY in https.rs
+cd dyahai-2.0\src\website_backend\src
+code .
 
-Open this project directory.
-
-```sh
-cd website
-```
-
-Install all required module.
-
-```sh
+# Install all dependencies
 npm i
-```
 
-<h3 id="installation">💡Usage</h3>
-Open WSL Ubuntu, start your dfx.
+# Open WSL Ubuntu, start your dfx.
+dfx start --clean --background --host 127.0.0.1:5000
 
-```sh
-dfx start --clean --background
-```
-
-Deploy this project, If you want to deploy in local.
-
-```sh
+# Deploy in local.
 dfx deploy
-```
 
-if you want to deploy in production :
-
-```sh
+# if you want to deploy in production
 dfx deploy --network ic
 ```
-<h3>Video demonstration : https://drive.google.com/drive/folders/1bIwVPZtqTU-rgMDybz0249sJKlzsF6iS</h3>
 
-<h3>Smart Contract : https://fy4ym-5yaaa-aaaan-qzoqa-cai.icp0.io/ </h3>
+## 🎥 Video Demonstration :  </br>
+[Video demonstration](https://www.youtube.com/watch?v=-WW5aZ5AHNM)
 
-<h3 id="contribution"> Contributors ❤</h3>
+## 👥 Contributors
 <a href="https://github.com/iAnoeloeby"><img src="https://avatars.githubusercontent.com/u/55847059?v=4" title="hasbi" width="80" height="80"></a>
 <a href="https://github.com/thoriqtau"><img src="https://avatars.githubusercontent.com/u/90580726?v=4" title="thoriq" width="80" height="80"></a>
 <a href="https://github.com/lutfimizaki"><img src="https://avatars.githubusercontent.com/u/140836746?v=4" title="fadhil" width="80" height="80"></a>
 <a href="https://github.com/WAW1311"><img src="https://avatars.githubusercontent.com/u/115858209?v=4" title="wahyu" width="80" height="80"></a>
 <a href="https://github.com/yubayu0"><img src="https://avatars.githubusercontent.com/u/111375965?v=4" title="bayu" width="80" height="80"></a>
 
-<h3 id="license"> License </h3>
-MIT © <a href="https://tabella.my.id/static/assets/LICENSE.txt">DyahAI</a>
+## 📄License
+The code of DyahAI is released under the MIT License - see the [LICENSE](LICENSE) file for details.
