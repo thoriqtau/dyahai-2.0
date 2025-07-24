@@ -103,17 +103,32 @@ pub async fn get_tx_summary(block_height: u64, memo: u64) -> String {
 
 #[ic_cdk::query]
 pub fn calculate_credit_from_icp(amount: Nat) -> u64 {
-    const ICP_PRICE_USD: f64 = 8.75;
+    // Sesuaikan harga dari frontend
+    const ICP_PRICE_USD: f64 = 6.2;
+    const GENERATE_PRICE: f64 = 0.1;
+    const ICP_PRICE_XDR: f64 = 4.2;
+    const REQUEST_IN_CYCLE: f64 = 10_800_000_000.0;
+    const ICP_CYCLE: f64 = ICP_PRICE_XDR * 1_000_000_000_000.0;
 
+    // Hitung nilai 1 credit dalam ICP
+    let new_generate_price = GENERATE_PRICE / ICP_PRICE_USD;
+    let request_price = REQUEST_IN_CYCLE / ICP_CYCLE;
+    let one_credit_is = new_generate_price + request_price;
+
+    // Konversi Nat (BigUint) ke f64
     let big_amount: &BigUint = &amount.0;
     let amount_e8s: f64 = big_amount.to_string().parse().unwrap_or(0.0);
 
+    // Konversi e8s ke ICP
     let icp = amount_e8s / 100_000_000.0;
-    let usd = icp * ICP_PRICE_USD;
 
-    // Aman: pakai pembulatan
-    usd.round() as u64
+    // Hitung berapa kredit yang didapat
+    let credit = icp / one_credit_is;
+
+    // Bulatkan ke bawah agar tidak memberikan kredit berlebih
+    credit.floor() as u64
 }
+
 
 
 #[query]

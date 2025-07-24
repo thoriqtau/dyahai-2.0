@@ -51,6 +51,7 @@ const GeneratePage = () => {
     actor,
   } = useAuth();
   const [isDragging, setIsDragging] = useState(false);
+  
   const [state, setState] = useState({
     isLoading: false,
     selectedFile: null,

@@ -130,7 +130,7 @@ const Navbar = ({
                           <Button
                             variant="outline"
                             size="icon"
-                            onClick={() => navigate("topup-credit")}
+                            onClick={() => navigate("/topup")}
                             className="w-max px-2 py-[6px] text-sm hover:bg-accentColor/[0.125]"
                           >
                             <p className="text-sm">
