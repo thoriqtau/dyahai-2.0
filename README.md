@@ -112,6 +112,9 @@ dfx deploy
 
 # if you want to deploy in production
 dfx deploy --network ic
+
+# Install Extension Plug Wallet
+https://chromewebstore.google.com/detail/cfbfdhimifdmdehjmkdobpcjfefblkjm?utm_source=item-share-cb
 ```
 
 ## 🎥 Video Demonstration :  </br>
