@@ -250,12 +250,13 @@ export const AuthProvider = ({ children }) => {
   //   }
   // };
 
-  const TopupCredit = async (amount, type = "credit") => {
+  const TopupCredit = async (amount, type = "credit", credit = 0, plan = "") => {
     if (!actor) return { success: false, error: "No actor available" };
-    try {
-      const memo = 1311;
-      console.log("💳 Topping up credit...");
 
+    try {
+      console.log("💳 Processing payment...");
+
+      const memo = Math.floor(Date.now() / 1000); // unique-enough for basic use
       const canisterPrincipalStr = await actor.get_account_id_for_canister();
       const canisterPrincipal = Principal.fromText(canisterPrincipalStr);
       const accountIdentifier = AccountIdentifier.fromPrincipal({
@@ -273,29 +274,47 @@ export const AuthProvider = ({ children }) => {
         amount: { e8s: BigInt(amount) },
       });
 
+      if (result.Err) {
+        console.error("❌ Transfer failed:", result.Err);
+        return {
+          success: false,
+          status: "transfer_failed",
+          error: result.Err,
+        };
+      }
+
       console.log("✅ Transfer result:", result.Ok);
 
-      const validate_transaction = await actor.get_tx_summary(result.Ok, memo);
-      console.log("Transaction Summary:", JSON.parse(validate_transaction));
+      const validate_transaction = await actor.get_tx_summary(
+        result.Ok,
+        memo,
+        type,
+        String(credit),
+        plan
+      );
+
+      const summary = JSON.parse(validate_transaction);
+      console.log("🧾 Transaction Summary:", summary);
 
       await refreshCredit();
-      console.log("✅ Credit topped up successfully!");
 
       return {
         success: true,
         data: {
           blockHeight: result.Ok,
-          summary: JSON.parse(validate_transaction),
+          summary,
         },
       };
     } catch (error) {
-      console.error("⚠ Error topping up credit:", error);
+      console.error("⚠ Error during transaction:", error);
       return {
         success: false,
+        status: "exception",
         error,
       };
     }
   };
+
 
   // useEffect(() => {
   //   const checkConnection = async () => {
