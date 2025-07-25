@@ -43,19 +43,19 @@ DyahAI is the winning project of Hackathon 7.0 organized by ICP Hub Indonesia. A
     <th colspan="4" align="center">🕰️ Old Features</th>
   </tr>
   <tr>
-    <td align="center">
+    <td align="center" width="25%">
       <h3>🧮 Motoko</h3>
       <p>Native language of ICP, used for rapid prototyping of canisters.</p>
     </td>
-    <td align="center">
+    <td align="center" width="25%">
       <h3>🔐 Internet Identity</h3>
       <p>Default identity system on ICP, easy to implement but limited wallet compatibility.</p>
     </td>
-    <td align="center">
+    <td align="center" width="25%">
       <h3>🚫 Top-up</h3>
       <p>Users couldn't add tokens or credits directly into the app.</p>
     </td>
-    <td align="center">
+    <td align="center" width="25%">
       <h3>💾 Stable Memory</h3>
       <p>Used ICP's stable memory for internal data storage.</p>
     </td>
@@ -65,19 +65,19 @@ DyahAI is the winning project of Hackathon 7.0 organized by ICP Hub Indonesia. A
     <th colspan="4" align="center">🚀 New Features</th>
   </tr>
   <tr>
-    <td align="center">
+    <td align="center" width="25%">
       <h3>🦀 Rust</h3>
       <p>Faster, safer, and more powerful for advanced system and AI integration.</p>
     </td>
-    <td align="center">
+    <td align="center" width="25%">
       <h3>👛 Plug Wallet</h3>
       <p>More flexible user authentication with wallet support for transactions and identity.</p>
     </td>
-    <td align="center">
+    <td align="center" width="25%">
       <h3>💳 Top-up</h3>
       <p>Users can top-up credits using ICP tokens to unlock features.</p>
     </td>
-    <td align="center">
+    <td align="center" width="25%">
       <h3>📦 IPFS</h3>
       <p>More scalable and decentralized file storage using IPFS integration.</p>
     </td>
