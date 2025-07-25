@@ -2,10 +2,14 @@
   🤖DyahAI: Decentralized Platform for Generative Images
 </h1>
 
-<p align="center">
-  <img src="https://pbs.twimg.com/media/GwjBQ-lb0AAbVkL?format=jpg&name=medium" width="50%">
-</p>
+<div align="center">
+<img src="https://pbs.twimg.com/media/GwjBQ-lb0AAbVkL?format=jpg&name=medium" width="50%">
 
+[🚀 Live Demo Mainnet](https://)
+
+</div>
+
+---
 # WCHL 2025 Hackathon Project
 
 ## 🌟 Introduction
