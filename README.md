@@ -44,7 +44,7 @@ DyahAI is the winning project of Hackathon 7.0 organized by ICP Hub Indonesia. A
   </tr>
   <tr>
     <td align="center">
-      <h3>🧮 Motoko Language</h3>
+      <h3>🧮 Motoko</h3>
       <p>Native language of ICP, used for rapid prototyping of canisters.</p>
     </td>
     <td align="center">
@@ -52,7 +52,7 @@ DyahAI is the winning project of Hackathon 7.0 organized by ICP Hub Indonesia. A
       <p>Default identity system on ICP, easy to implement but limited wallet compatibility.</p>
     </td>
     <td align="center">
-      <h3>🚫 No Top-up</h3>
+      <h3>🚫 Top-up</h3>
       <p>Users couldn't add tokens or credits directly into the app.</p>
     </td>
     <td align="center">
@@ -66,7 +66,7 @@ DyahAI is the winning project of Hackathon 7.0 organized by ICP Hub Indonesia. A
   </tr>
   <tr>
     <td align="center">
-      <h3>🦀 Rust Language</h3>
+      <h3>🦀 Rust</h3>
       <p>Faster, safer, and more powerful for advanced system and AI integration.</p>
     </td>
     <td align="center">
@@ -74,11 +74,11 @@ DyahAI is the winning project of Hackathon 7.0 organized by ICP Hub Indonesia. A
       <p>More flexible user authentication with wallet support for transactions and identity.</p>
     </td>
     <td align="center">
-      <h3>💳 Token Top-up</h3>
+      <h3>💳 Top-up</h3>
       <p>Users can top-up credits using ICP tokens to unlock features.</p>
     </td>
     <td align="center">
-      <h3>📦 IPFS Storage</h3>
+      <h3>📦 IPFS</h3>
       <p>More scalable and decentralized file storage using IPFS integration.</p>
     </td>
   </tr>
