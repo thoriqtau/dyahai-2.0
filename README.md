@@ -1,9 +1,12 @@
-<h1 align="center"">
-  🤖DyahAI: Decentralized Platform for Generative Images
-</h1>
+#  🤖DyahAI: Decentralized Platform for Generative Images
 
 <div align="center">
 <img src="https://pbs.twimg.com/media/GwjBQ-lb0AAbVkL?format=jpg&name=medium" width="50%">
+<p></p>
+  
+![ICP](https://img.shields.io/badge/Internet_Computer-Protocol-blue.svg?style=for-the-badge&logo=internetcomputer)
+![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white)
+![React](https://img.shields.io/badge/react-grey.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 
 [🚀 Live Demo Mainnet](https://)
 
