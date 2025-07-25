@@ -10,7 +10,7 @@ use candid::{CandidType, Deserialize};
 
 #[derive(Clone, CandidType, Deserialize)]
 pub struct UserData {
-    pub credits: Vec<u8>,
+    pub credits: u8,
     pub tier: UserTier,
 }
 
@@ -41,7 +41,7 @@ pub enum UserTier {
 #[update]
 pub fn save_user(principal: Principal) {
     let data = UserData {
-        credits: vec![3],
+        credits: 3,
         tier: UserTier::Basic, // Default tier
     };
     USERS_STORE.with(|user| {
@@ -49,15 +49,6 @@ pub fn save_user(principal: Principal) {
     });
     ic_cdk::println!("User Stored for principal: {}", principal);
 }
-
-// #[query]
-// pub fn get_user_tier(principal: Principal) -> UserTier {
-//     USERS_STORE.with(|user| {
-//         user.borrow().get(&principal)
-//             .map(|data| data.tier.clone())
-//             .unwrap_or(UserTier::Basic) // default fallback
-//     })
-// }
 
 #[update]
 pub fn upgrade_tier(principal: Principal, new_tier: UserTier) {
@@ -77,7 +68,7 @@ pub fn add_credit(principal: Principal, additional_credit: u8) {
     // Menambahkan credit ke pengguna yang sudah ada
     USERS_STORE.with(|user| {
         if let Some(user_data) = user.borrow_mut().get_mut(&principal) {
-            user_data.credits[0] += additional_credit;
+            user_data.credits += additional_credit;
             ic_cdk::println!("Added credit {} for principal: {}", additional_credit, principal);
         } else {
             ic_cdk::trap(&format!("User with principal {} not found", principal));
@@ -86,7 +77,7 @@ pub fn add_credit(principal: Principal, additional_credit: u8) {
 }
 
 #[query]
-pub fn get_credit(principal: Principal) -> Vec<u8> {
+pub fn get_credit(principal: Principal) -> u8 {
     USERS_STORE.with(|user| {
         user.borrow()
             .get(&principal)
@@ -101,8 +92,8 @@ pub fn get_credit(principal: Principal) -> Vec<u8> {
 pub fn reduction_credit(principal: Principal) {
     USERS_STORE.with(|user| {
         if let Some(user_data) = user.borrow_mut().get_mut(&principal) {
-            if !user_data.credits.is_empty() && user_data.credits[0] >= 1 {
-                user_data.credits[0] -= 1;
+            if user_data.credits > 0 {
+                user_data.credits -= 1;
                 ic_cdk::println!("Reduced credit by 1 for principal: {}", principal);
             } else {
                 ic_cdk::trap(&format!("Insufficient credit for principal: {}", principal));
@@ -143,5 +134,5 @@ pub fn user_post_upgrade() {
     USERS_STORE.with(|user| {
         *user.borrow_mut() = restored_user;
     });
-    ic_cdk::println!("Post-upgrade: Data users restored from stable memory.");
+    ic_cdk::println!("Post-upgrade: Data users restored from stable memory.");
 }

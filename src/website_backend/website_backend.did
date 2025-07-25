@@ -1,20 +1,21 @@
 type StyleStatusResult = record {
-  status: text;
-  image: opt vec nat8;
+    status : text;
+    image : opt vec nat8
 };
 
 service : {
-    "send_http_post_request": (blob,blob) -> (blob);
-    "send_http_post": (blob, blob) -> (text);
-    "check_style_status": (text) -> (StyleStatusResult);
-    "initialize_credit": () -> (text);
-    "get_balance": () -> (blob);
-    "get_images_by_principal": () -> (vec text);
-    "delete_image_by_index": (nat64) -> ();
-    "save_image_to_store": (text) -> ();
-    "get_tier": () -> (text);
-    "get_account_id_for_canister": () -> (text);
-    "get_tx_summary": (nat64,nat64) -> (text);
+    "send_http_post_request" : (blob, blob) -> (blob);
+    "send_http_post" : (blob, blob) -> (text);
+    "check_style_status" : (text) -> (StyleStatusResult);
+    "initialize_credit" : () -> (text);
+    "get_balance" : () -> (nat8);
+    "get_images_by_principal" : () -> (vec text);
+    "delete_image_by_index" : (nat64) -> ();
+    "save_image_to_store" : (text) -> ();
+    "get_tier" : () -> (text);
+    "get_account_id_for_canister" : () -> (text);
+    "get_tx_summary" : (nat64, nat64, text, text, text) -> (text);
+    "get_transaction" : () -> (vec text);
     "transform": (record {
         response : record {
             status_code : nat16;

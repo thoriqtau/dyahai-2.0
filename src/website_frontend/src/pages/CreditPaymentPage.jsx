@@ -44,10 +44,6 @@ const CreditPaymentPage = () => {
 
   const presetValues = [1, 3, 5, 10, 20, 50, 100, 200, 500, 1000];
 
-  const shorten = (str, start = 10, end = 8) => {
-    if (!str || str.length <= start + end) return str;
-    return `${str.slice(0, start)}...${str.slice(-end)}`;
-  };
 
   // Validasi hanya angka
   const creditCalculate = (value) => {
@@ -76,7 +72,7 @@ const CreditPaymentPage = () => {
     try {
       setPaymentStatus("processing");
 
-      const txResult = await TopupCredit(icpInE8s, "Credit");
+      const txResult = await TopupCredit(icpInE8s, "credit",inputCredit,"");
 
       // Setelah transfer berhasil
       if (txResult.success) {
