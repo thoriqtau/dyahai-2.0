@@ -91,55 +91,52 @@ DyahAI is the winning project of Hackathon 7.0 organized by ICP Hub Indonesia. A
 
 ## 🔗 Get Started
 ### 📋 Prerequisites
+Install WSL on PowerShell 
 ```bash
-# Open PowerShell on "Run as administrator" mode
-# Enter the wsl --install command, then restart your machine.
 wsl --install
+```
 
-# Open WSL, and install dfx.
+Open WSL, and install dfx.
+```bash
 sh -ci "$(curl -fsSL https://internetcomputer.org/install.sh)"
 ```
 
 ### ⚡ Installation Step
+1. Clone the repository using PowerShell
 ```bash
-# Clone the repository using PowerShell
 git clone https://github.com/WAW1311/dyahai-2.0.git
-cd dyahai-2.0
+```
 
-# Open the project in VS Code
-code .
-
-# Rename `.env.example` to `.env`
-
-# Fill in the values for the variables `STORACHA_API_KEY` and `STORACHA_PROOF` in `.env`
-# You can find the values here:
+2. Rename `.env.example` to `.env`
+   
+3. Copy `STORACHA_API_KEY` and `STORACHA_PROOF` links below and paste them into the `.env` file <br>
 https://pastelink.net/2i6qrerr
 
-# Add your MINTER_PRINCIPAL_ID (your DFX identity principal) into `.env`
-# Run this command to get your principal:
+4. Copy your dfx identity principal `MINTER_PRINCIPAL_ID` from the command below and paste it into the `.env` file
+```bash
 dfx identity get-principal
+```
 
-# Copy the output and paste it into your `.env` file:
-# MINTER_PRINCIPAL_ID=aaaaa-aa-bbbbbb-cccccc-ddddd-eeee
-
-# Install all dependencies
+5. Install all dependencies
+```bash
 npm install
+```
 
-# Run deployment using bash script
+6. Run deployment using bash script
+```bash
 bash deploy.sh
+```
 
-# ⚠️ If you want to deploy to mainnet (Internet Computer):
-# Open file `deploy.sh` and add flag `--network ic`
-# to every command starting with `dfx` (except `dfx start`).
---network ic
-# Example: change `dfx deploy backend` -> `dfx deploy backend --network ic`
+#### ⚠️ If you want to deploy to mainnet (Internet Computer):
+7. Open the `deploy.sh` file and add the `--network ic` flag to every command starting with `dfx` (except `dfx start`) <br>
+e.g., change `dfx deploy backend` to `dfx deploy backend --network ic`
 
-# You can find information about your canister project in the `.env.local` file
-
-# Install Extension Plug Wallet
+8. Install Extension Plug Wallet
+```bash
 https://chromewebstore.google.com/detail/cfbfdhimifdmdehjmkdobpcjfefblkjm?utm_source=item-share-cb
 ```
-## 🛠️ Extra Step for Local Deployment : </br>
+
+## 🛠️ Extra Step for Local Deployment </br>
 
 - **If you deploy locally, make sure to switch Plug Wallet into Dev/Test Mode**:
 
@@ -150,13 +147,13 @@ https://chromewebstore.google.com/detail/cfbfdhimifdmdehjmkdobpcjfefblkjm?utm_so
 5. Enable Test Mode.
 6. Done ✅ (now your wallet can connect to http://127.0.0.1:5000).
 
-## 🎥 Video Demonstration :  </br>
+## 🎥 Video Demonstration  </br>
 [Video demonstration](https://youtu.be/zvcZufyHNoc?si=mux5XDI6TI78YeeU)
 
-## 🎥 Pitch Deck :  </br>
+## 🎥 Pitch Deck  </br>
 [Pitch Deck](https://drive.google.com/file/d/1DV04JlF6NE5jtphdk5nDT44hM4onbm1l/view?usp=sharing)
 
-## 🎥 Pitch Video :  </br>
+## 🎥 Pitch Video </br>
 [Pitch Video](https://youtu.be/zvmsngTkHn4)
 
 ## 👥 Contributors
