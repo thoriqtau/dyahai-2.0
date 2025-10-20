@@ -50,8 +50,9 @@ DyahAI is the winning project of Hackathon 7.0 organized by ICP Hub Indonesia. A
 ## 🤖 AI Image Generation
 - User provided input images, consisting of a face image and a style.
 - Using **InsighFace** for face detection and verification.
-- Using **Stable Diffusion 1.5** as the base model.
-- Using **IP-Adapter** to maintain face consistency during the swap process.
+- **CodeFormer** for face restoratio
+- **Stable Diffusion 1.5** as the base model.
+- **IP-Adapter** to maintain face consistency during the swap process.
 - Hosting AI pipeline on **Runpod** Serverless.
 
 ## 🔗 Blockchain Infrastructure Built on Internet Computer (ICP)
