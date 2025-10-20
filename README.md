@@ -85,10 +85,10 @@ DyahAI is the winning project of Hackathon 7.0 organized by ICP Hub Indonesia. A
 <!-- <img src="https://bafybeihef6cylhmlpjcl57i5czryevwn3fwz5gdhxwjh5b352atrc7osrq.ipfs.w3s.link/homepage.png" /> -->
 
 ## How it Works
-<img src="https://pbs.twimg.com/media/G3tzzidXYAEUBdQ?format=jpg&name=900x900" />
+<img src="https://pbs.twimg.com/media/G3t-3FyWcAAJgkr?format=jpg&name=900x900" />
 
 ## Architecture System
-<img src="https://pbs.twimg.com/media/G3txeOCXUAEU5Js?format=jpg&name=900x900" />
+<img src="https://pbs.twimg.com/media/G3t-5wfXIAA8lgP?format=jpg&name=900x900" />
 
 ---
 
