@@ -80,11 +80,15 @@ DyahAI is the winning project of Hackathon 7.0 organized by ICP Hub Indonesia. A
 - Vercel.
 - Runpod.
 - Diffusers Huggingface.
+- ICP Ledger.
 
 <!-- <img src="https://bafybeihef6cylhmlpjcl57i5czryevwn3fwz5gdhxwjh5b352atrc7osrq.ipfs.w3s.link/homepage.png" /> -->
 
-## 📊 Architecture Workflow
-<img src="https://pbs.twimg.com/media/GwmcmufbAAAG997?format=jpg&name=large" />
+## How it Works
+<img src="https://pbs.twimg.com/media/G3tzzidXYAEUBdQ?format=jpg&name=900x900" />
+
+## Architecture System
+<img src="https://pbs.twimg.com/media/G3txeOCXUAEU5Js?format=jpg&name=900x900" />
 
 ---
 
