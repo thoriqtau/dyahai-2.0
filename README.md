@@ -1,4 +1,4 @@
-#  🤖DyahAI: Decentralized Platform for Generative Images
+#  DyahAI: Decentralized Platform for Generative Images
 
 <div align="center">
 <img src="https://pbs.twimg.com/media/GwjBQ-lb0AAbVkL?format=jpg&name=medium" width="50%">
@@ -15,8 +15,6 @@
 </div>
 
 ---
-# WCHL 2025 Hackathon Project
-
 ## 🌟 Introduction
 <p align="justify">
 DyahAI is an AI platform that lets users transform ordinary images into unique works of art with customizable styles. Powered by Web3 technology and smart contracts. DyahAI offers a secure, decentralized, and high-quality experience, producing high-resolution images suitable for various needs.
@@ -37,52 +35,41 @@ DyahAI is an AI platform that lets users transform ordinary images into unique w
 ## 🏆 Pre-existing Project
 DyahAI is the winning project of Hackathon 7.0 organized by ICP Hub Indonesia. At WCHL 2025, DyahAI continued its innovation journey by expanding its capabilities and introducing a range of new features aimed at enhancing user experience, and technological integration.
 
-## ⚡What’s New During the WCHL Regional Round 2025
-<table cellspacing="0" cellpadding="8">
-  <tr>
-    <th colspan="4" align="center">🕰️ Old Features</th>
-  </tr>
-  <tr>
-    <td align="center" valign="top">
-      <h3>Credit</h3>
-      <p>Credits were implemented as an internal balance system stored directly in the canister.</p>
-    </td>
-    <td align="center" valign="top">
-      <h3>Payment</h3>
-      <p>Payments in the dapp were processed by deducting balances from this internal credit system.</p>
-    </td>
-    <td align="center" valign="top">
-      <h3>Top-up</h3>
-      <p>Users topped up their credits by converting ICP payments into changes on the simulated credit balance.</p>
-    </td>
-    <td align="center" valign="top">
-      <h3>Limited Transparency</h3>
-      <p>Transactions and credit usage were only recorded internally, making them inaccessible for public verification.</p>
-    </td>
-  </tr>
+# ✨ Key Features
+## 🤖 AI Image Generation
+- User provided input images, consisting of a face image and a style.
+- Using **InsighFace** for face detection and verification.
+- Using **Stable Diffusion 1.5** as the base model.
+- Using **IP-Adapter** to maintain face consistency during the swap process.
+- Hosting AI pipeline on **Runpod** Serverless.
 
-  <tr>
-    <th colspan="4" align="center">🚀 New Features</th>
-  </tr>
-  <tr>
-    <td align="center" valign="top">
-      <h3>Dyah AI Token</h3>
-      <p>DYA tokens are issued following the ICRC ledger standard, ensuring interoperability and security.</p>
-    </td>
-    <td align="center" valign="top">
-      <h3>Token Burning</h3>
-      <p>Dapp payments are executed by burning DYA tokens from the user’s balance.</p>
-    </td>
-    <td align="center" valign="top">
-      <h3>Token Minting</h3>
-      <p>Users can request new DYA tokens to be minted by depositing a defined amount of ICP.</p>
-    </td>
-    <td align="center" valign="top">
-      <h3>Blockchain Explorer</h3>
-      <p>All token transfers and activities are publicly available through the DyahAI token ledger explorer.</p>
-    </td>
-  </tr>
-</table>
+## 🔗 Blockchain Infrastructure Built on Internet Computer (ICP)
+### File Storage
+- **IPFS Storacha**: More scalable and decentralized file storage
+- **Canister Stable Memory**: Stable memory for internal data storage.
+  
+### Auth Method
+- **Plug Wallet**: Wallet based authentication and transaction signing.
+- **Internet Identity**: Passwordless, privacy-preserving identity system.
+
+### Minting Token
+- **DyahAI Token (ICRC-1)**: Credit payment system.
+- **NFT (ICRC-7)**: Creating and managing NFT collections.
+
+## 🏗️ Technology Stack
+**Frontend (ReactJS)**
+- ReactJS.
+- Tailwind CSS.
+- Vite.
+
+**Backend (Rust)**
+- Rust.
+- Vercel.
+- Runpod.
+- Diffusers Huggingface.
+
+
+
 
 <img src="https://bafybeihef6cylhmlpjcl57i5czryevwn3fwz5gdhxwjh5b352atrc7osrq.ipfs.w3s.link/homepage.png" />
 
