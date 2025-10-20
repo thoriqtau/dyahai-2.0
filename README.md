@@ -1,7 +1,9 @@
-#  DyahAI: Decentralized Platform for Generative Images
+<h1 align="center"">
+  DyahAI: Decentralized Platform for Generative Images
+</h1>
 
 <div align="center">
-<img src="https://pbs.twimg.com/media/GwjBQ-lb0AAbVkL?format=jpg&name=medium" width="50%">
+<img src="https://github.com/DyahCode/testing-assets/blob/main/logo/DyahAI-logo.svg" width="10%">
 <p></p>
 
 ![ICP](https://img.shields.io/badge/Internet_Computer-Protocol-blue.svg?style=for-the-badge&logo=internetcomputer)
@@ -15,16 +17,21 @@
 </div>
 
 ---
+
 ## 🌟 Introduction
 <p align="justify">
 DyahAI is an AI platform that lets users transform ordinary images into unique works of art with customizable styles. Powered by Web3 technology and smart contracts. DyahAI offers a secure, decentralized, and high-quality experience, producing high-resolution images suitable for various needs.
 </p>
+
+---
 
 ## 📋 Problem Summary
 - **High Cost of Digital Art Creation**: Creating digital art usually requires expensive software, which many users cannot afford.
 - **Time-Consuming Process**: Manual illustration takes a significant amount of time, which is not practical for users who want quick results.
 - **Lack of Customization**: Offering basic text-to-image generation without the ability to guide pose or style.
 - **High Hardware Requirements**: Running the model locally requires a high-VRAM GPU.
+  
+---
 
 ## ✨ Our Solution
 - **Free Credits for New Users**: Provide free usage quotas for users, with the option to top up without obligation.
@@ -32,8 +39,12 @@ DyahAI is an AI platform that lets users transform ordinary images into unique w
 - **Various Artistic Styles**: Can choose from a variety of pre-defined visual styles, without needing prompts.
 - **Serverless GPU**: Providing backend inference through cloud-based GPUs so that users do not need to own dedicated hardware.
 
+---
+
 ## 🏆 Pre-existing Project
 DyahAI is the winning project of Hackathon 7.0 organized by ICP Hub Indonesia. At WCHL 2025, DyahAI continued its innovation journey by expanding its capabilities and introducing a range of new features aimed at enhancing user experience, and technological integration.
+
+---
 
 # ✨ Key Features
 ## 🤖 AI Image Generation
@@ -56,25 +67,26 @@ DyahAI is the winning project of Hackathon 7.0 organized by ICP Hub Indonesia. A
 - **DyahAI Token (ICRC-1)**: Credit payment system.
 - **NFT (ICRC-7)**: Creating and managing NFT collections.
 
+---
+
 ## 🏗️ Technology Stack
-**Frontend (ReactJS)**
+### Frontend (ReactJS)
 - ReactJS.
 - Tailwind CSS.
 - Vite.
 
-**Backend (Rust)**
+### Backend (Rust)
 - Rust.
 - Vercel.
 - Runpod.
 - Diffusers Huggingface.
 
-
-
-
-<img src="https://bafybeihef6cylhmlpjcl57i5czryevwn3fwz5gdhxwjh5b352atrc7osrq.ipfs.w3s.link/homepage.png" />
+<!-- <img src="https://bafybeihef6cylhmlpjcl57i5czryevwn3fwz5gdhxwjh5b352atrc7osrq.ipfs.w3s.link/homepage.png" /> -->
 
 ## 📊 Architecture Workflow
 <img src="https://pbs.twimg.com/media/GwmcmufbAAAG997?format=jpg&name=large" />
+
+---
 
 ## 🔗 Get Started
 ### 📋 Prerequisites
@@ -123,6 +135,8 @@ e.g., change `dfx deploy backend` to `dfx deploy backend --network ic`
 https://chromewebstore.google.com/detail/cfbfdhimifdmdehjmkdobpcjfefblkjm?utm_source=item-share-cb
 ```
 
+---
+
 ## 🛠️ Extra Step for Local Deployment </br>
 
 - **If you deploy locally, make sure to switch Plug Wallet into Dev/Test Mode**:
@@ -134,14 +148,22 @@ https://chromewebstore.google.com/detail/cfbfdhimifdmdehjmkdobpcjfefblkjm?utm_so
 5. Enable Test Mode.
 6. Done ✅ (now your wallet can connect to http://127.0.0.1:5000).
 
+---
+
 ## 🎥 Video Demonstration  </br>
 [Video demonstration](https://youtu.be/zvcZufyHNoc?si=mux5XDI6TI78YeeU)
+
+---
 
 ## 🎥 Pitch Deck  </br>
 [Pitch Deck](https://drive.google.com/file/d/1DV04JlF6NE5jtphdk5nDT44hM4onbm1l/view?usp=sharing)
 
+---
+
 ## 🎥 Pitch Video </br>
 [Pitch Video](https://youtu.be/zvmsngTkHn4)
+
+---
 
 ## 👥 Contributors
 <a href="https://github.com/iAnoeloeby"><img src="https://avatars.githubusercontent.com/u/55847059?v=4" title="hasbi" width="80" height="80"></a>
@@ -149,6 +171,8 @@ https://chromewebstore.google.com/detail/cfbfdhimifdmdehjmkdobpcjfefblkjm?utm_so
 <a href="https://github.com/lutfimizaki"><img src="https://avatars.githubusercontent.com/u/140836746?v=4" title="fadhil" width="80" height="80"></a>
 <a href="https://github.com/WAW1311"><img src="https://avatars.githubusercontent.com/u/115858209?v=4" title="wahyu" width="80" height="80"></a>
 <a href="https://github.com/yubayu0"><img src="https://avatars.githubusercontent.com/u/111375965?v=4" title="bayu" width="80" height="80"></a>
+
+---
 
 ## 📄License
 The code of DyahAI is released under the MIT License - see the [LICENSE](LICENSE) file for details.
